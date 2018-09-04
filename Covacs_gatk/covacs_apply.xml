@@ -1,0 +1,56 @@
+ <tool id="covacs_apply_snp" name="covacs_apply_snp" version="3.8">
+  <description>gatk covacs apply</description>
+  <macros>
+  <import>covacs_macros.xml</import>
+  </macros>
+  <requirements>
+  	<requirement type="package" version="3.8" >gatk</requirement>
+  </requirements>
+  <command>
+    <![CDATA[
+ ln -s $region region.bed &&
+ ln -s $input1 input1.vcf &&
+
+
+java  -jar /export/GATK/GenomeAnalysisTK.jar -T ApplyRecalibration
+-L region.bed
+-ip $ip
+
+#if $reference_source.reference_source_selector == "cached"
+                -R $reference_source.ref_file.fields.path
+#end if
+
+-input input1.vcf
+--ts_filter_level $ts_filter_level
+-tranchesFile $input2
+-recalFile $input3
+-mode $mode
+-ef -o variants_recal.filtered.98HQ.vcf
+
+
+
+
+	]]>
+  </command>
+  <inputs>
+    <expand macro="reference_loc"/>
+    <param format="vcf" name="input1" type="data" />
+    <param format="bed" name="region" type="data" />
+    <param name="ip" type="text"/>
+    <param name="ts_filter_level" type="text"/>
+    <param name="input2" type="data"/>
+    <param name="input3" type="data"/>
+    <param name="mode" type="select">
+	<option value="SNP">snp</option>
+	<option value="INDEL">INDEL</option>
+    </param>
+  </inputs>
+  <outputs>
+    <data format="txt" name="variants_recal" from_work_dir="variants_recal.filtered.98HQ.vcf" label="${tool.name} on ${on_string}:recal"/>
+  </outputs>
+  <help>
+  </help>
+  <citations>
+  </citations>
+</tool>
+

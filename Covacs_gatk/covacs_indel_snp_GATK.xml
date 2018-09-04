@@ -1,0 +1,104 @@
+ <tool id="covacs_snp" name="covacs_snp" version="3.8">
+  <description>gatk covacs</description>
+  <macros>
+  <import>covacs_macros.xml</import>
+  </macros>
+  <requirements>
+  	<requirement type="package" version="3.8" >gatk</requirement>
+  </requirements>
+  <command>
+    <![CDATA[
+	ln -s $region region.bed &&
+	ln -s $input1 input1.vcf &&
+
+	java -jar  /export/GATK/GenomeAnalysisTK.jar -T VariantRecalibrator
+	-L region.bed
+	-ip $ip
+	#if $reference_source.reference_source_selector == "cached"
+      		-R $reference_source.ref_file.fields.path
+      	#end if
+	
+	-input input1.vcf
+
+
+	#for $r in $resource#
+
+		 --resource:${r.nameresource},known=${r.known.value},training=${r.training.value},truth=${r.truth.value},prior=${r.prior.value} ${r.resource_input}
+
+	#end for
+
+	-mode $mode_type.mode
+	#if $mode_type.mode="INDEL"
+		--minNumBadVariants $mode_type.mode.minNumBadVariants
+		--maxGaussian $mode_type.mode.maxGaussian
+		-mNG $mode_type.mode.mNG
+	#end if	
+
+	#for $a in $an#
+
+		-an ${a.an_name.value}
+
+	#end for 
+
+
+	#for $t in $tranches_name#
+
+		-tranches ${t.tranches.value}
+	#end for
+
+	-recalFile $recal
+	-tranchesFile $tranches
+
+	]]>
+  </command>
+  <inputs>
+    <expand macro="reference_loc"/>
+    <param format="vcf" name="input1" type="data" />
+    <param format="bed" name="region" type="data" />
+    <param name="ip" type="text"/>
+    <repeat name="resource" title="-resource">
+      <param name="resource_input" type="data" lable="select"/>
+      <param name="nameresource" value="res" type="text"/>
+      <param name="known" type="select">
+	<option value="true">true</option>
+	<option value="false">false</option>
+      </param>
+      <param name="training" type="select">
+	<option value="true">true</option>
+	<option value="false">false</option>
+      </param>
+      <param name="truth" type="select">
+	<option value="true">true</option>
+	<option value="false">false</option>
+      </param>
+      <param name="prior" value="dcmdcms" type="text"/>
+    </repeat>
+   <repeat name="an" title="-an">
+      <param name="an_name" value="" type="text"/>
+    </repeat>   	
+    <repeat name="tranches_name" title="tranches">
+      <param name="tranches" value="" type="text"/>
+    </repeat>
+    <conditional name="mode_type">
+    	<param name="mode" type="select">
+		<option value="SNP">snp</option>
+		<option value="INDEL">INDEL</option>
+    	</param>	
+    	<when value="INDEL">
+		<param name="maxGaussian" type="integer" value="4"/>
+		<param name="minNumBadVariants" type="integer" value="5000"/>
+		<param name="mNG" type="integer" value="2"/>
+    	</when>
+    </conditional>
+  </inputs>
+  <outputs>
+    <data format="txt" name="recal" from_work_dir="recal" label="${tool.name} on ${on_string}:recal"/>
+    <data format="txt" name="tranches" from_work_dir="tranches" label="${tool.name} on ${on_string}:tranches"/>
+    <data format="txt" name="log" label="log"/>
+  </outputs>
+  <help>
+  </help>
+  <citations>
+  </citations>
+</tool>
+
