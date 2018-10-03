@@ -8,18 +8,32 @@
   </requirements>
   <command>
     <![CDATA[
-	ln -s $region region.bed &&
-	ln -s $input1 input1.vcf &&
 
-	java -jar  /export/GATK/GenomeAnalysisTK.jar -T VariantRecalibrator
+	##sym link to run GATK
+	#if $region
+	
+	ln -s $region region.bed && 
+	
+	#end if
+
+	ln -s $input1 input1.vcf &&
+	
+	##GATK tool call
+	java -jar  /export/GATK/GATK3.8-1/GenomeAnalysisTK.jar -T VariantRecalibrator
+	#if $region
 	-L region.bed
+	#end if
 	-ip $ip
+	##call chose genome from mutect2_indexes.loc
 	#if $reference_source.reference_source_selector == "cached"
       		-R $reference_source.ref_file.fields.path
       	#end if
 	
+	##vcf input parameter
+
 	-input input1.vcf
 
+	## for that permit to insert different resources
 
 	#for $r in $resource#
 
@@ -28,11 +42,15 @@
 	#end for
 
 	-mode $mode_type.mode
-	#if $mode_type.mode="INDEL"
-		--minNumBadVariants $mode_type.mode.minNumBadVariants
-		--maxGaussian $mode_type.mode.maxGaussian
-		-mNG $mode_type.mode.mNG
+	##chose between INDEL and SNP call
+
+	#if $mode_type.mode == "INDEL"
+		--minNumBadVariants $mode_type.minNumBadVariants
+		--maxGaussians $mode_type.maxGaussian
+		-mNG $mode_type.mNG
 	#end if	
+
+	## for that permit to insert different resources
 
 	#for $a in $an#
 
@@ -40,21 +58,25 @@
 
 	#end for 
 
+	## for that permit to insert different resources
 
 	#for $t in $tranches_name#
 
-		-tranches ${t.tranches.value}
+		-tranche ${t.tranches.value}
 	#end for
+	
+	##outputs
 
 	-recalFile $recal
 	-tranchesFile $tranches
 
+	2> $log
 	]]>
   </command>
   <inputs>
     <expand macro="reference_loc"/>
     <param format="vcf" name="input1" type="data" />
-    <param format="bed" name="region" type="data" />
+    <param format="bed" name="region" type="data" optional="true"/>
     <param name="ip" type="text"/>
     <repeat name="resource" title="-resource">
       <param name="resource_input" type="data" lable="select"/>
