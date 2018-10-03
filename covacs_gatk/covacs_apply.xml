@@ -8,12 +8,17 @@
   </requirements>
   <command>
     <![CDATA[
+#if $region
  ln -s $region region.bed &&
+#end if
+
  ln -s $input1 input1.vcf &&
 
 
-java  -jar /export/GATK/GenomeAnalysisTK.jar -T ApplyRecalibration
+java  -jar /export/GATK/GATK3.8-1/GenomeAnalysisTK.jar -T ApplyRecalibration
+#if $region
 -L region.bed
+#end if
 -ip $ip
 
 #if $reference_source.reference_source_selector == "cached"
@@ -25,7 +30,7 @@ java  -jar /export/GATK/GenomeAnalysisTK.jar -T ApplyRecalibration
 -tranchesFile $input2
 -recalFile $input3
 -mode $mode
--ef -o variants_recal.filtered.98HQ.vcf
+-ef -o variants_recal.filtered.98HQ.vcf 2> $log
 
 
 
@@ -35,18 +40,19 @@ java  -jar /export/GATK/GenomeAnalysisTK.jar -T ApplyRecalibration
   <inputs>
     <expand macro="reference_loc"/>
     <param format="vcf" name="input1" type="data" />
-    <param format="bed" name="region" type="data" />
+    <param format="bed" name="region" type="data" optional="true" />
     <param name="ip" type="text"/>
     <param name="ts_filter_level" type="text"/>
-    <param name="input2" type="data"/>
-    <param name="input3" type="data"/>
+    <param name="input2" type="data" help="tranchesfile"/>
+    <param name="input3" type="data" help="recalfile"/>
     <param name="mode" type="select">
 	<option value="SNP">snp</option>
 	<option value="INDEL">INDEL</option>
     </param>
   </inputs>
   <outputs>
-    <data format="txt" name="variants_recal" from_work_dir="variants_recal.filtered.98HQ.vcf" label="${tool.name} on ${on_string}:recal"/>
+    <data format="txt" name="variants_recal" from_work_dir="variants_recal.filtered.98HQ.vcf" label="${tool.name} on ${on_string}:recal_filtered"/>
+    <data format="txt" name="log"  label="${tool.name} on ${on_string}:log"/>
   </outputs>
   <help>
   </help>
