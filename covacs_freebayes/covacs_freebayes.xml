@@ -1,0 +1,55 @@
+ <tool id="covacs_frebayes" name="covacs_freebayes" version="1.2.0">
+  <description>freebayes wrapper for covacs</description>
+  <macros>
+  <import>covacs_macros.xml</import>
+  </macros>
+  <requirements>
+	<requirement type="package" version="1.2.0" >freebayes</requirement>
+  </requirements>
+  <command>
+    <![CDATA[
+
+	##sym link to run freebayes
+	
+	ln -s $input1 input.bam &&
+	
+	
+	#if $region
+	
+	ln -s $region region.bed &&
+	
+	#end if
+	
+	freebayes
+	
+	   ##call chose genome from mutect2_indexes.loc
+        #if $reference_source.reference_source_selector == "cached"
+                -f $reference_source.ref_file.fields.path
+        #end if
+	-C $input2
+	
+	#if $region
+	-t region.bed
+	#end if
+	$input1 
+	> $output
+	
+
+
+	]]>
+  </command>
+  <inputs>
+    <expand macro="reference_loc"/>
+    <param format="bam" name="input1" type="data" optional="true" />
+    <param format="bed" name="region" type="data" optional="true"/>
+    <param name="input2" type="text" optional="true"/>
+  </inputs>
+  <outputs>
+    <data format="vcf" name="output" label="${tool.name} on ${on_string}:vcf"/>
+  </outputs>
+  <help>
+  </help>
+  <citations>
+  </citations>
+</tool>
+
