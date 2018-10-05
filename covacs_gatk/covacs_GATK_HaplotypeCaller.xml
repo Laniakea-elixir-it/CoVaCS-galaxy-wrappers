@@ -1,0 +1,82 @@
+ <tool id="covacs_GATK_HaplotypeCaller" name="covacs_GATK_HaplotypeCaller" version="3.8">
+  <description>gatk covacs</description>
+  <macros>
+  <import>covacs_macros.xml</import>
+  </macros>
+  <requirements>
+	<requirement type="package" version="1.7" >samtools</requirement>
+  	<requirement type="package" version="3.8" >gatk</requirement>
+  </requirements>
+  <command>
+    <![CDATA[
+
+	##sym link to run GATK
+	#if $dbsnp
+	
+	ln -s $dbsnp dbsnp.vcf
+	
+	#end if 
+	
+	#if $region
+	
+	ln -s $region region.bed 
+	
+	#end if
+	samtools index -@ \${GALAXY_SLOTS:-4} $input1 &&
+	ln -s $input1".bai" input1.bam.bai &&
+	ln -s $input1 input1.bam &&
+	
+	##GATK tool call
+
+	java -jar  \$CONDA_PREFIX/../../GenomeAnalysisTK.jar -T HaplotypeCaller
+	
+	#if $region
+	-L region.bed
+	#end if
+	
+	##call chose genome from mutect2_indexes.loc
+	#if $reference_source.reference_source_selector == "cached"
+      		-R $reference_source.ref_file.fields.path
+      	#end if
+	
+	##bam input parameter
+
+	-I input1.bam
+	
+	#if $standCall
+	-stand_call_conf $standCall
+	#end if
+	
+
+	##GVCF output
+	#if $GVCF
+	--emitRefConfidence GVCF
+	-variant_index_type LINEAR -variant_index_parameter 128000
+	#end if
+
+	##outputs
+
+	-o $output 2> $log
+
+	]]>
+  </command>
+  <inputs>
+    <expand macro="reference_loc"/>
+    <param format="bam" name="input1" type="data" optional="true" />
+    <param format="bed" name="region" type="data" optional="true"/>
+    <param format="vcf" name="dbsnp" type="data" optional="true"/>
+    <param name="standCall" type="text" optional="true"/>
+    <param name="GVCF" type="select" optional="true">
+	<option value="GVCF">GVCF_output</option>
+    </param>
+  </inputs>
+  <outputs>
+    <data format="vcf" name="output" label="${tool.name} on ${on_string}:vcf"/>
+    <data format="txt" name="log" label="${tool.name} on ${on_string}:log"/>
+  </outputs>
+  <help>
+  </help>
+  <citations>
+  </citations>
+</tool>
+

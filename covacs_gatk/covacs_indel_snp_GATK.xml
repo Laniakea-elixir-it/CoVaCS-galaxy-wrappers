@@ -19,7 +19,7 @@
 	ln -s $input1 input1.vcf &&
 	
 	##GATK tool call
-	java -jar  /export/GATK/GATK3.8-1/GenomeAnalysisTK.jar -T VariantRecalibrator
+	java -jar  \$CONDA_PREFIX/../../GenomeAnalysisTK.jar -T VariantRecalibrator
 	#if $region
 	-L region.bed
 	#end if
@@ -75,7 +75,7 @@
   </command>
   <inputs>
     <expand macro="reference_loc"/>
-    <param format="vcf" name="input1" type="data" />
+    <param format="vcf" name="input1" type="data" optional="true" />
     <param format="bed" name="region" type="data" optional="true"/>
     <param name="ip" type="text"/>
     <repeat name="resource" title="-resource">
