@@ -1,0 +1,32 @@
+ <tool id="covacs_tabix" name="covacs_tabix" version="0.2.6">
+  <description>gatk covacs apply</description>
+  <macros>
+  </macros>
+  <requirements>
+  	<requirement type="package" version="0.2.6" >tabix</requirement>
+  </requirements>
+  <command>
+    <![CDATA[
+        ln -s $input1 covacs.vcf &&
+
+	bgzip covacs.vcf &&
+	tabix covacs.vcf.gz           
+	
+
+
+
+	]]>
+  </command>
+  <inputs>
+    <param format="vcf" name="input1" type="data" optional="true" />
+  </inputs>
+  <outputs>
+    <data format="bgzip" name="bgzip_output" from_work_dir="covacs.vcf.gz" label="bgzip on ${on_string}"/>
+    <data format="tabix" name="tabix_output" from_work_dir="covacs.vcf.gz.tbi" label="tabix on ${on_string}"/>
+  </outputs>
+  <help>
+  </help>
+  <citations>
+  </citations>
+</tool>
+
