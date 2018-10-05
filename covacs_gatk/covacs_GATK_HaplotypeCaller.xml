@@ -1,5 +1,5 @@
  <tool id="covacs_GATK_HaplotypeCaller" name="covacs_GATK_HaplotypeCaller" version="3.8">
-  <description>gatk covacs</description>
+  <description>gatk HaplotypeCaller wrapper for covacs</description>
   <macros>
   <import>covacs_macros.xml</import>
   </macros>
