@@ -4,7 +4,7 @@
         <requirement type="package" version="2.4.2">varscan</requirement>
     </requirements>
     <macros>
-        <import>varsca2_macros.xml</import>
+        <import>bed_macros.xml</import>
     </macros>
     <stdio>
         <regex match="Exception" source="both" level="fatal" description="Tool exception"/>
@@ -40,11 +40,11 @@ varscan 2>&1 | head -n 1
         
 	## varscan bed limit added
 
- 	#if $reference_source.reference_source_selector == "history"
-      	limit $reference_source.reference
+ 	#if $bed_source.bed_source_selector == "history"
+      	limit $bed_source.bed_history
       	#end if
-        #if $reference_source.reference_source_selector == "cached"
-      	limit $reference_source.ref_file.fields.path
+        #if $bed_source.bed_source_selector == "cached"
+      	limit $bed_source.bed_cached.fields.path
       	#end if
 
         ## Set up outputs.
@@ -63,7 +63,7 @@ varscan 2>&1 | head -n 1
           <option value="mpileup2indel">insertions and deletions</option>
           <option value="mpileup2cns">consensus genotype</option>
         </param>
-	<expand macro="reference_loc"/>
+	<expand macro="bed_loc"/>
         <param name="min_coverage" type="integer" value="8" min="1" max="200" label="Minimum read depth" help="Minimum depth at a position to make a call"/>
         <param name="min_supporting_reads" type="integer" value="2" min="1" max="200" label="Minimum supporting reads" help="Minimum supporting reads at a position to make a call"/>
         <param name="min_avg_qual" type="integer" value="15" min="1" max="50" label="Minimum base quality at a position to count a read"/>
