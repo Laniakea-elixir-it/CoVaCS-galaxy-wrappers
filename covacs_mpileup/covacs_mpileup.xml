@@ -1,0 +1,35 @@
+ <tool id="covacs_mpileup" name="covacs_mpileup" version="1.9">
+  <description>mpileup for covacs</description>
+  <macros>
+  </macros>
+  <requirements>
+  	<requirement type="package" version="0.2.6" >samtools</requirement>
+  </requirements>
+  <command>
+    <![CDATA[
+       samtools mpileup -C50 -m4 -i .bed -d 100000 -q 0 -Q 0 -f .fa $input1 -A > $output
+
+	
+
+
+
+	]]>
+  </command>
+  <inputs>
+    <param format="bam" name="input1" type="data" optional="true" />
+    <param name="adjust" type="text" optional="true" value="50" />
+    <param name="minimum" type="text" optional="true" value="4" />
+    <param format="bed" name="position" type="data" optional="true" />
+    <param name="MappingQuality" type="text" optional="true" value="0" />
+    <param name="BaseQuality" type="text" optional="true" value="0" />
+    <param format="fasta" name="Reference" type="data" optional="true" />
+  </inputs>
+  <outputs>
+    <data format="pileup" name="output" label="mpileup on ${on_string}"/>
+  </outputs>
+  <help>
+  </help>
+  <citations>
+  </citations>
+</tool>
+
