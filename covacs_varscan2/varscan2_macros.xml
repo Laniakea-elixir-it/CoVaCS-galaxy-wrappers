@@ -7,7 +7,7 @@
             </param>
             <when value="cached">
                 <param name="ref_file" type="select" label="Using reference bed" help="Select bed from the list">
-                    <options from_data_table="varscan2_bed">
+                    <options from_data_table="covacs_bed">
                         <filter type="sort_by" column="2" />
                         <validator type="no_options" message="No indexes are available" />
                     </options>
