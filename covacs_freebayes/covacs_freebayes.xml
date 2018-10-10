@@ -2,6 +2,7 @@
   <description>freebayes wrapper for covacs</description>
   <macros>
   <import>covacs_macros.xml</import>
+  <import>bed_macros.xml</import>
   </macros>
   <requirements>
 	<requirement type="package" version="1.2.0" >freebayes</requirement>
@@ -14,9 +15,10 @@
 	ln -s $input1 input.bam &&
 	
 	
-	#if $region
+	#if $bed_source.bed_source_selector == "history"
+
 	
-	ln -s $region region.bed &&
+	ln -s $bed_source.bed_history region.bed &&
 	
 	#end if
 	
@@ -26,11 +28,20 @@
         #if $reference_source.reference_source_selector == "cached"
                 -f $reference_source.ref_file.fields.path
         #end if
+        #if $reference_source.reference_source_selector == "history"
+		-f $reference_source.ref_file_h
+	#end if
+	
+
 	-C $input2
 	
-	#if $region
-	-t region.bed
-	#end if
+	#if $bed_source.bed_source_selector == "history"
+        -t  region.bed
+        #end if
+        #if $bed_source.bed_source_selector == "cached"
+        -t $bed_source.bed_cached.fields.path
+        #end if
+
 	$input1 
 	> $output
 	
@@ -41,7 +52,7 @@
   <inputs>
     <expand macro="reference_loc"/>
     <param format="bam" name="input1" type="data" optional="true" />
-    <param format="bed" name="region" type="data" optional="true"/>
+    <expand macro="bed_loc"/>
     <param name="input2" type="text" optional="true"/>
   </inputs>
   <outputs>
