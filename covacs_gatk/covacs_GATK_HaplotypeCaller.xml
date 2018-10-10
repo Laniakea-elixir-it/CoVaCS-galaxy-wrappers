@@ -1,7 +1,8 @@
  <tool id="covacs_GATK_HaplotypeCaller" name="covacs_GATK_HaplotypeCaller" version="3.8">
   <description>gatk HaplotypeCaller wrapper for covacs</description>
   <macros>
-  <import>covacs_macros.xml</import>
+	<import>covacs_macros.xml</import>
+	<import>bed_macros.xml</import>
   </macros>
   <requirements>
 	<requirement type="package" version="1.7" >samtools</requirement>
@@ -16,10 +17,11 @@
 	ln -s $dbsnp dbsnp.vcf
 	
 	#end if 
+ 	
+	#if $bed_source.bed_source_selector == "history"
+        ln -s  $bed_source.bed_history region.bed
+	#end if	
 	
-	#if $region
-	
-	ln -s $region region.bed 
 	
 	#end if
 	samtools index -@ \${GALAXY_SLOTS:-4} $input1 &&
@@ -30,10 +32,19 @@
 
 	java -jar  \$CONDA_PREFIX/../../GenomeAnalysisTK.jar -T HaplotypeCaller
 	
-	#if $region
+	
+	#if $bed_source.bed_source_selector == "history"
+
 	-L region.bed
+
 	#end if
 	
+	#if $bed_source.bed_source_selector == "cached"
+        
+	-L $bed_source.bed_cached.fields.path
+        
+	#end if	
+
 	##call chose genome from mutect2_indexes.loc
 	#if $reference_source.reference_source_selector == "cached"
       		-R $reference_source.ref_file.fields.path
@@ -63,7 +74,7 @@
   <inputs>
     <expand macro="reference_loc"/>
     <param format="bam" name="input1" type="data" optional="true" />
-    <param format="bed" name="region" type="data" optional="true"/>
+    <expand macro="bed_loc"/>
     <param format="vcf" name="dbsnp" type="data" optional="true"/>
     <param name="standCall" type="text" optional="true"/>
     <param name="GVCF" type="select" optional="true">
