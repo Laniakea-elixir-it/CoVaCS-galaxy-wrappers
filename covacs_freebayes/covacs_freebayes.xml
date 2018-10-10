@@ -32,8 +32,9 @@
 		-f $reference_source.ref_file_h
 	#end if
 	
-
+	#if $input2
 	-C $input2
+	#end if
 	
 	#if $bed_source.bed_source_selector == "history"
         -t  region.bed
