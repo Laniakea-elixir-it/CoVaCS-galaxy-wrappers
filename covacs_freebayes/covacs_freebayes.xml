@@ -10,17 +10,8 @@
   <command>
     <![CDATA[
 
-	##sym link to run freebayes
-	
-	ln -s $input1 input.bam &&
 	
 	
-	#if $bed_source.bed_source_selector == "history"
-
-	
-	ln -s $bed_source.bed_history region.bed &&
-	
-	#end if
 	
 	freebayes
 	
@@ -37,13 +28,13 @@
 	#end if
 	
 	#if $bed_source.bed_source_selector == "history"
-        -t  region.bed
+        -t  $bed_source.bed_history 
         #end if
         #if $bed_source.bed_source_selector == "cached"
         -t $bed_source.bed_cached.fields.path
         #end if
 
-	input.bam 
+	$input1
 	> $output
 
 
