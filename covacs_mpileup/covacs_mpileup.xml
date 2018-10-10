@@ -1,13 +1,27 @@
  <tool id="covacs_mpileup" name="covacs_mpileup" version="1.9">
   <description>mpileup for covacs</description>
   <macros>
+	<import>bed_macros.xml</import>
   </macros>
   <requirements>
   	<requirement type="package" version="0.2.6" >samtools</requirement>
   </requirements>
   <command>
     <![CDATA[
-       samtools mpileup -C50 -m4 -i .bed -d 100000 -q 0 -Q 0 -f .fa $input1 -A > $output
+       samtools mpileup -C $adjust -m $minimum
+
+	#if $bed_source.bed_source_selector == "history"
+        -i $bed_source.bed_history
+        #end if
+        #if $bed_source.bed_source_selector == "cached"
+        -i $bed_source.bed_cached.fields.path
+        #end if
+
+	-d $depth
+	-q $MappingQuality
+	-Q $BaseQuality
+ 	-f $Reference
+	$input1 -A > $output
 
 	
 
@@ -19,7 +33,8 @@
     <param format="bam" name="input1" type="data" optional="true" />
     <param name="adjust" type="text" optional="true" value="50" />
     <param name="minimum" type="text" optional="true" value="4" />
-    <param format="bed" name="position" type="data" optional="true" />
+    <expand macro="bed_loc"/>
+    <param name="depth" type="text" optional="true" value="100000" />
     <param name="MappingQuality" type="text" optional="true" value="0" />
     <param name="BaseQuality" type="text" optional="true" value="0" />
     <param format="fasta" name="Reference" type="data" optional="true" />
