@@ -2,6 +2,7 @@
   <description>mpileup for covacs</description>
   <macros>
 	<import>bed_macros.xml</import>
+	<import>covacs_macros.xml</import>
   </macros>
   <requirements>
   	<requirement type="package" version="0.2.6" >samtools</requirement>
@@ -20,7 +21,19 @@
 	-d $depth
 	-q $MappingQuality
 	-Q $BaseQuality
- 	-f $Reference
+
+	#if $reference_source.reference_source_selector == "cached"
+                -f $reference_source.ref_file.fields.path
+        #end if
+	
+	#if $reference_source.reference_source_selector == "history"
+	
+         -f $reference_source.ref_file_h
+	
+	#end if
+	
+
+
 	$input1 -A > $output
 
 	
@@ -37,7 +50,7 @@
     <param name="depth" type="text" optional="true" value="100000" />
     <param name="MappingQuality" type="text" optional="true" value="0" />
     <param name="BaseQuality" type="text" optional="true" value="0" />
-    <param format="fasta" name="Reference" type="data" optional="true" />
+    <expand macro="reference_loc"/>
   </inputs>
   <outputs>
     <data format="pileup" name="output" label="mpileup on ${on_string}"/>
