@@ -1,7 +1,6 @@
  <tool id="covacs_snp" name="covacs_snp" version="3.8">
   <description>gatk covacs</description>
   <macros>
-  <import>covacs_macros.xml</import>
   </macros>
   <requirements>
   	<requirement type="package" version="3.8" >gatk</requirement>
@@ -25,9 +24,7 @@
 	#end if
 	-ip $ip
 	##call chose genome from mutect2_indexes.loc
-	#if $reference_source.reference_source_selector == "cached"
-      		-R $reference_source.ref_file.fields.path
-      	#end if
+      		-R $ref_file.fields.path
 	
 	##vcf input parameter
 
@@ -74,7 +71,13 @@
 	]]>
   </command>
   <inputs>
-    <expand macro="reference_loc"/>
+    <param name="ref_file" type="select" label="Using reference genome" help="Select genome from the list">
+       <options from_data_table="mutect2_indexes">
+         <filter type="sort_by" column="2" />
+         <validator type="no_options" message="No indexes are available" />
+       </options>
+       <validator type="no_options" message="A built-in reference genome is not available for the build associated with the selected input file"/>
+    </param>
     <param format="vcf" name="input1" type="data" optional="true" />
     <param format="bed" name="region" type="data" optional="true"/>
     <param name="ip" type="text"/>

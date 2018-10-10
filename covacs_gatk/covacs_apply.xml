@@ -1,7 +1,6 @@
  <tool id="covacs_apply_snp" name="covacs_apply_snp" version="3.8">
   <description>gatk covacs apply</description>
   <macros>
-  <import>covacs_macros.xml</import>
   </macros>
   <requirements>
   	<requirement type="package" version="3.8" >gatk</requirement>
@@ -21,10 +20,8 @@ java  -jar \$CONDA_PREFIX/../../GenomeAnalysisTK.jar -T ApplyRecalibration
 -L region.bed
 #end if
 -ip $ip
-
-#if $reference_source.reference_source_selector == "cached"
-                -R $reference_source.ref_file.fields.path
-#end if
+###index from .loc
+-R $ref_file.fields.path
 
 -input input1.vcf
 --ts_filter_level $ts_filter_level
@@ -39,7 +36,13 @@ java  -jar \$CONDA_PREFIX/../../GenomeAnalysisTK.jar -T ApplyRecalibration
 	]]>
   </command>
   <inputs>
-    <expand macro="reference_loc"/>
+    <param name="ref_file" type="select" label="Using reference genome" help="Select genome from the list">
+       <options from_data_table="mutect2_indexes">
+         <filter type="sort_by" column="2" />
+         <validator type="no_options" message="No indexes are available" />
+       </options>
+       <validator type="no_options" message="A built-in reference genome is not available for the build associated with the selected input file"/>
+    </param>
     <param format="vcf" name="input1" type="data" optional="true" />
     <param format="bed" name="region" type="data" optional="true" />
     <param name="ip" type="text"/>
