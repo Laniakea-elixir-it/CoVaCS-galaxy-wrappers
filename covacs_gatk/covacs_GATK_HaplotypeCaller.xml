@@ -13,16 +13,15 @@
 	##sym link to run GATK
 	#if $dbsnp
 	
-	ln -s $dbsnp dbsnp.vcf
+	ln -s $dbsnp dbsnp.vcf &&
 	
 	#end if 
  	
 	#if $bed_source.bed_source_selector == "history"
-        ln -s  $bed_source.bed_history region.bed
+        ln -s  $bed_source.bed_history region.bed &&
 	#end if	
 	
 	
-	#end if
 	samtools index -@ \${GALAXY_SLOTS:-4} $input1 &&
 	ln -s $input1".bai" input1.bam.bai &&
 	ln -s $input1 input1.bam &&
