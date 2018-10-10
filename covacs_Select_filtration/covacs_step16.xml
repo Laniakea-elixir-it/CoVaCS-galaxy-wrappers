@@ -1,0 +1,55 @@
+ <tool id="covacs_step16" name="covacs_step16" version="3.8">
+  <description>gatk covacs</description>
+  <macros>
+  </macros>
+  <requirements>
+  	<requirement type="package" version="3.8" >gatk</requirement>
+  </requirements>
+  <command>
+    <![CDATA[
+
+	##sym link to run GATK
+
+	ln -s $input1 input1.vcf &&
+	
+	##GATK tool call
+	java -jar  \$CONDA_PREFIX/../../GenomeAnalysisTK.jar
+	-T SelectVariants 
+	-R $ref_file.fields.path
+	-V input1.vcf
+	-selectType INDEL 
+	-o variants_recal.indels.vcf 2>$log 
+		&&
+	java -jar  \$CONDA_PREFIX/../../GenomeAnalysisTK.jar 
+	-T VariantFiltration 
+	-R $ref_file.fields.path
+	-V variants_recal.indels.vcf 
+	--filterExpression "DP<8 || QD < 2.0 || FS > 200.0 || ReadPosRankSum < -20.0" 
+	--filterName "filter_LQ_indels" 
+	-o  variants_recal.filtered.small.panel.region.vcf
+
+	2>> $log
+	]]>
+  </command>
+  <inputs>
+    <param format="vcf" name="input1" type="data" optional="true" />
+    <param format="vcf" name="input1" type="data" optional="true" />
+    <param name="ref_file" type="select" label="Using reference genome" help="Select genome from the list">
+       <options from_data_table="mutect2_indexes">
+      	 <filter type="sort_by" column="2" />
+       	 <validator type="no_options" message="No indexes are available" />
+       </options>
+       <validator type="no_options" message="A built-in reference genome is not available for the build associated with the selected input file"/>
+    </param>
+  </inputs>
+  <outputs>
+    <data format="vcf" name="recal" from_work_dir="variants_recal.indels.vcf" label="SelectVariants on ${on_string}:recal"/>
+    <data format="vcf" name="filtered" from_work_dir="variants_recal.filtered.small.panel.region.vcf" label="VariantFiltration on ${on_string}:recal"/>
+    <data format="txt" name="log" label="log"/>
+  </outputs>
+  <help>
+  </help>
+  <citations>
+  </citations>
+</tool>
+
