@@ -1,5 +1,5 @@
  <tool id="covacs_tabix" name="covacs_tabix" version="0.2.6">
-  <description>gatk covacs apply</description>
+  <description> covacs tabix</description>
   <macros>
   </macros>
   <requirements>
@@ -11,9 +11,6 @@
 
 	bgzip covacs.vcf &&
 	tabix covacs.vcf.gz           
-	
-
-
 
 	]]>
   </command>

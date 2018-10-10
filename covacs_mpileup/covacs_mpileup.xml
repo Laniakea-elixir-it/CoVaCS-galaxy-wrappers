@@ -31,8 +31,6 @@
          -f $reference_source.ref_file_h
 	
 	#end if
-	
-
 
 	$input1 -A > $output
 

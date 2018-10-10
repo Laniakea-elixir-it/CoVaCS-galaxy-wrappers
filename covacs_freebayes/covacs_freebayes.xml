@@ -24,7 +24,7 @@
 	
 	freebayes
 	
-	   ##call chose genome from mutect2_indexes.loc
+	   ##call chose genome from mutect2_indexes.loc and from history 
         #if $reference_source.reference_source_selector == "cached"
                 -f $reference_source.ref_file.fields.path
         #end if
@@ -44,7 +44,6 @@
 
 	$input1 
 	> $output
-	
 
 
 	]]>
