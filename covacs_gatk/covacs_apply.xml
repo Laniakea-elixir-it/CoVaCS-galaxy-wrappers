@@ -7,28 +7,28 @@
   </requirements>
   <command>
     <![CDATA[
-#if $region
- ln -s $region region.bed &&
-#end if
+	#if $region
+	 ln -s $region region.bed &&
+	#end if
 
- ln -s $input1 input1.vcf &&
+	 ln -s $input1 input1.vcf &&
 
 
 
-java  -jar \$CONDA_PREFIX/../../GenomeAnalysisTK.jar -T ApplyRecalibration
-#if $region
--L region.bed
-#end if
--ip $ip
-###index from .loc
--R $ref_file.fields.path
+	java  -jar \$CONDA_PREFIX/../../GenomeAnalysisTK.jar -T ApplyRecalibration
+	#if $region
+	-L region.bed
+	#end if
+	-ip $ip
+	###index from .loc
+	-R $ref_file.fields.path
 
--input input1.vcf
---ts_filter_level $ts_filter_level
--tranchesFile $input2
--recalFile $input3
--mode $mode
--ef -o variants_recal.filtered.98HQ.vcf 2> $log
+	-input input1.vcf
+	--ts_filter_level $ts_filter_level
+	-tranchesFile $input2
+	-recalFile $input3
+	-mode $mode
+	-ef -o variants_recal.filtered.98HQ.vcf 2> $log
 
 
 
@@ -43,12 +43,12 @@ java  -jar \$CONDA_PREFIX/../../GenomeAnalysisTK.jar -T ApplyRecalibration
        </options>
        <validator type="no_options" message="A built-in reference genome is not available for the build associated with the selected input file"/>
     </param>
-    <param format="vcf" name="input1" type="data" optional="true" />
-    <param format="bed" name="region" type="data" optional="true" />
+    <param format="vcf" name="input1" label="input vcf" type="data" optional="true" />
+    <param format="bed" name="region" label="bed file" type="data" optional="true" />
     <param name="ip" type="text"/>
     <param name="ts_filter_level" type="text"/>
-    <param name="input2" type="data" help="tranchesfile"/>
-    <param name="input3" type="data" help="recalfile"/>
+    <param name="input2" type="data" label="tranchesfile"/>
+    <param name="input3" type="data" label="recalfile"/>
     <param name="mode" type="select">
 	<option value="SNP">snp</option>
 	<option value="INDEL">INDEL</option>

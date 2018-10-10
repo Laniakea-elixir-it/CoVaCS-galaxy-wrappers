@@ -71,18 +71,18 @@
 	]]>
   </command>
   <inputs>
-    <param name="ref_file" type="select" label="Using reference genome" help="Select genome from the list">
+    <param name="ref_file" type="select" label="Using indexed reference genome" help="Select indexed genome from the list">
        <options from_data_table="mutect2_indexes">
          <filter type="sort_by" column="2" />
          <validator type="no_options" message="No indexes are available" />
        </options>
        <validator type="no_options" message="A built-in reference genome is not available for the build associated with the selected input file"/>
     </param>
-    <param format="vcf" name="input1" type="data" optional="true" />
-    <param format="bed" name="region" type="data" optional="true"/>
+    <param format="vcf" name="input1" label="input vcf" type="data" optional="true" />
+    <param format="bed" name="region" label="bed file" type="data" optional="true"/>
     <param name="ip" type="text"/>
     <repeat name="resource" title="-resource">
-      <param name="resource_input" type="data" lable="select"/>
+      <param name="resource_input" type="data" lable="select resources"/>
       <param name="nameresource" value="res" type="text"/>
       <param name="known" type="select">
 	<option value="true">true</option>

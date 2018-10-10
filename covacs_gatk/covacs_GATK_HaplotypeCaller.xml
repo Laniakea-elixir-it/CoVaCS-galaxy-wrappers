@@ -21,7 +21,7 @@
         ln -s  $bed_source.bed_history region.bed &&
 	#end if	
 	
-	
+	###indexing and symlink to run GATK	
 	samtools index -@ \${GALAXY_SLOTS:-4} $input1 &&
 	ln -s $input1".bai" input1.bam.bai &&
 	ln -s $input1 input1.bam &&
@@ -68,7 +68,7 @@
 	]]>
   </command>
   <inputs>
-    <param name="ref_file" type="select" label="Using reference genome" help="Select genome from the list">
+    <param name="ref_file" type="select" label="Using indexed reference genome" help="Select genome index from the list">
        <options from_data_table="mutect2_indexes">
          <filter type="sort_by" column="2" />
          <validator type="no_options" message="No indexes are available" />
