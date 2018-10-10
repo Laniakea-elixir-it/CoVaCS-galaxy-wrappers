@@ -42,7 +42,7 @@
   </command>
   <inputs>
     <expand macro="reference_loc"/>
-    <param format="bam" name="input1" type="data" optional="true" />
+    <param format="bam" name="input1" label="bam file" type="data" optional="true" />
     <expand macro="bed_loc"/>
     <param name="input2" label="-C" type="text" optional="true"/>
   </inputs>
