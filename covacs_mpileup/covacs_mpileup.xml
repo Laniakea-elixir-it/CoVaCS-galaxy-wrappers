@@ -33,7 +33,7 @@
 	
 	#end if
 
-	$input1 -A -o $output
+	$input1 -A -o $output 2>$log
 
 	
 
@@ -52,6 +52,7 @@
   </inputs>
   <outputs>
     <data format="pileup" name="output" label="mpileup on ${on_string}"/>
+    <data format="txt" name="log" label="mpileup on ${on_string}:log"/>
   </outputs>
   <help>
   </help>
