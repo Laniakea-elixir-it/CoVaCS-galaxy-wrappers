@@ -89,7 +89,7 @@
     <param name="ip" type="text"/>
     <repeat name="resource" title="-resource">
       <param name="resource_input" type="data" lable="select resources"/>
-      <param name="nameresource" value="res" type="text"/>
+      <param name="nameresource" value="hapmap" type="text"/>
       <param name="known" type="select">
 	<option value="true">true</option>
 	<option value="false">false</option>
@@ -102,7 +102,7 @@
 	<option value="true">true</option>
 	<option value="false">false</option>
       </param>
-      <param name="prior" value="dcmdcms" type="text"/>
+      <param name="prior" value="10.0" type="text"/>
     </repeat>
    <repeat name="an" title="-an">
       <param name="an_name" value="" type="text"/>
