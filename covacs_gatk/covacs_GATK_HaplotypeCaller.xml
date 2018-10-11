@@ -78,7 +78,7 @@
     <param format="bam" name="input1" label="bam file" type="data" optional="true" />
     <expand macro="bed_loc"/>
     <param format="vcf" name="dbsnp" label="input dbsnp file" type="data" optional="true"/>
-    <param name="standCall" type="text" optional="true"/>
+    <param name="standCall" value="30" type="text" optional="true"/>
     <param name="GVCF" type="select" optional="true">
 	<option value="GVCF">GVCF_output</option>
     </param>
