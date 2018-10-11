@@ -5,23 +5,24 @@
 	<import>covacs_macros.xml</import>
   </macros>
   <requirements>
-  	<requirement type="package" version="0.2.6" >samtools</requirement>
+  	<requirement type="package" version="1.9" >samtools</requirement>
   </requirements>
   <command>
     <![CDATA[
-       samtools mpileup -C $adjust -m $minimum
 
+
+       samtools mpileup 
+	 -C $adjust 
 	#if $bed_source.bed_source_selector == "history"
-        -i $bed_source.bed_history
-        #end if
-        #if $bed_source.bed_source_selector == "cached"
-        -i $bed_source.bed_cached.fields.path
-        #end if
+	  -l $bed_source.bed_history
+	  #end if
+  	  #if $bed_source.bed_source_selector == "cached"
+   	  -l $bed_source.bed_cached.fields.path
+    	 #end if
 
 	-d $depth
 	-q $MappingQuality
 	-Q $BaseQuality
-
 	#if $reference_source.reference_source_selector == "cached"
                 -f $reference_source.ref_file.fields.path
         #end if
@@ -32,7 +33,7 @@
 	
 	#end if
 
-	$input1 -A > $output
+	$input1 -A -o $output
 
 	
 
@@ -41,9 +42,8 @@
 	]]>
   </command>
   <inputs>
-    <param format="bam" name="input1" type="data" optional="true" />
+    <param format="bam" name="input1" label="bam-input" type="data" optional="true" />
     <param name="adjust" type="text" optional="true" value="50" />
-    <param name="minimum" type="text" optional="true" value="4" />
     <expand macro="bed_loc"/>
     <param name="depth" type="text" optional="true" value="100000" />
     <param name="MappingQuality" type="text" optional="true" value="0" />

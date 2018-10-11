@@ -26,14 +26,13 @@
 	-V variants_recal.indels.vcf 
 	--filterExpression "DP<8 || QD < 2.0 || FS > 200.0 || ReadPosRankSum < -20.0" 
 	--filterName "filter_LQ_indels" 
-	-o  variants_recal.filtered.small.panel.region.vcf
+	-o variants_recal.filtered.small.panel.region.vcf
 
 	2>> $log
 	]]>
   </command>
   <inputs>
-    <param format="vcf" name="input1" type="data" optional="true" />
-    <param format="vcf" name="input1" type="data" optional="true" />
+    <param format="vcf" name="input1" label="input VCF" type="data" optional="true" />
     <param name="ref_file" type="select" label="Using reference genome" help="Select genome from the list">
        <options from_data_table="mutect2_indexes">
       	 <filter type="sort_by" column="2" />
