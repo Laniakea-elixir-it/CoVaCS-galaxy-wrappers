@@ -1,24 +1,35 @@
  <tool id="covacs_apply_snp" name="covacs_apply_snp" version="3.8">
   <description>gatk covacs apply</description>
   <macros>
+	<import>bed_macros.xml</import>
   </macros>
   <requirements>
   	<requirement type="package" version="3.8" >gatk</requirement>
   </requirements>
   <command>
     <![CDATA[
-	#if $region
-	 ln -s $region region.bed &&
+	
+
+
+	
+	#if $bed_source.bed_source_selector == "history"
+	 ln -s $bed_source.bed_history region.bed &&
 	#end if
 
 	 ln -s $input1 input1.vcf &&
 
-
-
 	java  -jar \$CONDA_PREFIX/../../GenomeAnalysisTK.jar -T ApplyRecalibration
-	#if $region
-	-L region.bed
-	#end if
+	
+
+
+	#if $bed_source.bed_source_selector == "history"
+        -L  region.bed
+        #end if
+        #if $bed_source.bed_source_selector == "cached"
+        -L $bed_source.bed_cached.fields.path
+        #end if
+
+
 	-ip $ip
 	###index from .loc
 	-R $ref_file.fields.path
@@ -44,7 +55,7 @@
        <validator type="no_options" message="A built-in reference genome is not available for the build associated with the selected input file"/>
     </param>
     <param format="vcf" name="input1" label="input vcf" type="data" optional="true" />
-    <param format="bed" name="region" label="bed file" type="data" optional="true" />
+    <expand macro="bed_loc"/>
     <param name="ip" type="text"/>
     <param name="ts_filter_level" type="text"/>
     <param name="input2" type="data" label="tranchesfile"/>
