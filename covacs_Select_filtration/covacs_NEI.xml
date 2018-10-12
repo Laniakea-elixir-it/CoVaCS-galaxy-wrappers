@@ -17,7 +17,7 @@
 	-T SelectVariants 
 	-R $ref_file.fields.path
 	-V input1.vcf
-	-selectType INDEL 
+	-selectType $TYPE
 	-o variants_recal.indels.vcf 2>$log 
 		&&
 	java -jar  \$CONDA_PREFIX/../../GenomeAnalysisTK.jar 
@@ -25,7 +25,7 @@
 	-R $ref_file.fields.path
 	-V variants_recal.indels.vcf 
 	--filterExpression "DP<8 || QD < 2.0 || FS > 200.0 || ReadPosRankSum < -20.0" 
-	--filterName "filter_LQ_indels" 
+	--filterName "filter_LQ_$TYPE" 
 	-o variants_recal.filtered.small.panel.region.vcf
 
 	2>> $log
@@ -40,10 +40,14 @@
        </options>
        <validator type="no_options" message="A built-in reference genome is not available for the build associated with the selected input file"/>
     </param>
+    <param name="TYPE" type="select" optional="true">
+        <option value="INDEL">INDEL</option>
+        <option value="SNP" selected="true" >SNP</option>
+    </param>	
   </inputs>
   <outputs>
-    <data format="vcf" name="recal" from_work_dir="variants_recal.indels.vcf" label="SelectVariants on ${on_string}:recal"/>
-    <data format="vcf" name="filtered" from_work_dir="variants_recal.filtered.small.panel.region.vcf" label="VariantFiltration on ${on_string}:recal"/>
+    <data format="vcf" name="recal" from_work_dir="variants_recal.indels.vcf" label="SelectVariants on ${on_string} $TYPE :recal"/>
+    <data format="vcf" name="filtered" from_work_dir="variants_recal.filtered.small.panel.region.vcf" label="VariantFiltration on ${on_string} $TYPE :recal"/>
     <data format="txt" name="log" label="log"/>
   </outputs>
   <help>
