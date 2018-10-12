@@ -1,5 +1,5 @@
- <tool id="covacs_step16" name="covacs_step16" version="3.8">
-  <description>gatk covacs</description>
+ <tool id="covacs_Select&Filtration" name="covacs_Select&filtration" version="3.8">
+  <description>use in case of not enought snp or indels in covacs_snp_indels</description>
   <macros>
   </macros>
   <requirements>
