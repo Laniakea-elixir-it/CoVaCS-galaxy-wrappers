@@ -7,9 +7,9 @@
   $input1 $input2 $input3 intersect 2>log
   </command>
   <inputs>
-    <param name="input1" format="vcf" type="data" label="VCF File" help="varscan2 indels output" />
-    <param name="input2" format="vcf" type="data" label="VCF File" help="frebayes indels output" />
-    <param name="input3" format="vcf" type="data" label="VCF File" help="GATK haplotypecaller indels output" />
+    <param name="input1" format="vcf" type="data" label="VCF File" help="Varscan2 indels output" />
+    <param name="input2" format="vcf" type="data" label="VCF File" help="Frebayes indels output" />
+    <param name="input3" format="vcf" type="data" label="VCF File" help="GATK HaplotypeCaller indels output" />
   </inputs>
   <outputs>
     <data format="vcf" name="output1" from_work_dir="intersect.common.indels.vcf" label="${tool.name} on ${on_string} common indels" />
@@ -20,7 +20,9 @@
   </stdio>
   <help>
   </help>
-
+  <citations>
+	<citation type="doi">10.1186/s12864-018-4508-1</citation>
+  </citations>
   <tests>
     <test>
     </test>
