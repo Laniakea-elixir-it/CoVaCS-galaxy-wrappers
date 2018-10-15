@@ -81,6 +81,24 @@
       </test>
   </tests>
   <help>
+**What it does**
+
+This tool will annotate variants using specified gene annotations, regions, and filtering databases. Input is a VCF dataset, and output is a table of annotations for each variant in the
+VCF dataset or a VCF dataset with the annotations in INFO fields.
+
+**ANNOVAR Website and Documentation**
+
+Website: http://www.openbioinformatics.org/annovar/
+
+Paper: http://nar.oxfordjournals.org/content/38/16/e164
+
+**Important Usage Note**
+
+ANNOVAR is open-source and free for non-profit use. If you use it for commercial purposes, please contact BIOBASE (info@biobase-international.com) directly for license related issues. Also see http://www.openbioinformatics.org/annovar/annovar_faq.html#license
+
+**IMPORTANT** to get the wrapper ready to start the admin user have to download annovar."version".tar.gz and then move it in the conda_prefix folder, the path of the conda_prefix is written in the galaxy.ini(or .yml) file
+
+
   </help>
   <citations>
 	<citation type="doi">10.1093/nar/gkq603</citation>
