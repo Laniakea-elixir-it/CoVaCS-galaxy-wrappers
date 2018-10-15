@@ -30,7 +30,7 @@
 	
 	##GATK tool call
 
-	java -jar  \$CONDA_PREFIX/GenomeAnalysisTK.jar -T HaplotypeCaller
+	java -jar  \$CONDA_PREFIX/../../GenomeAnalysisTK.jar -T HaplotypeCaller
 	
 	
 	#if $bed_source.bed_source_selector == "history"
