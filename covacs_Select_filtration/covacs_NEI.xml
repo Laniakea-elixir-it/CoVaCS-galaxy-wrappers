@@ -51,10 +51,11 @@
     <data format="txt" name="log" label="log"/>
   </outputs>
   <help>
- **IMPORTANT** to get the wrapper ready to start the admin user have to download gatk GATK version 3.8 from the broadinstitute site https://software.broadinstitute.org/gatk/download/archive and then move it in the conda_prefix folder, the path of the conda_prefix is written in the galaxy.ini(or .yml) file
+ **IMPORTANT** to get the wrapper ready to start the admin user have to download gatk GATK version 3.8 from the broadinstitute site https://software.broadinstitute.org/gatk/download/archive and then move it in the conda_prefix folder, the path of the conda_prefix is written in the galaxy.ini(or .yml) file 
 
 		**more informations** at https://software.broadinstitute.org/gatk/documentation/tooldocs/3.8-0/org_broadinstitute_gatk_tools_walkers_variantutils_SelectVariants.php , https://software.broadinstitute.org/gatk/documentation/tooldocs/3.8-0/org_broadinstitute_gatk_tools_walkers_filters_VariantFiltration.php
 
+**description** this step can be used if covacs_indel_snp have not enought data to create the model, it calls SelectVariants and VariantFiltration applying the filter expression --filterExpression <![CDATA["DP<8 || QD < 2.0 || FS > 200.0 || ReadPosRankSum < -20.0"]]> to filter the variants both snp and indels
 
   </help>
   <citations>
