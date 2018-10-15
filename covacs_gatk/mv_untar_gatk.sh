@@ -1,6 +1,6 @@
 #!/bin/bash
-#if the symbolic link is not present in the conda env of annovar the script search the tar.gz in the _conda prefix of the vm untar 
-#the archive and make a symbolic link of the directory in the conda env
+#if the .jar file is not present in the conda_prefix the script search the tar.gz in the conda_prefix of the vm
+#and untar the archive
 if [[ ! -f $CONDA_PREFIX/../../GenomeAnalysisTK.jar ]] ; then
 	tar -zxvf $CONDA_PREFIX/../../GenomeAnalysis*.tar.gz -C $CONDA_PREFIX/../../ 
 	
