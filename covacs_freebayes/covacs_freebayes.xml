@@ -1,5 +1,5 @@
  <tool id="covacs_frebayes" name="covacs_freebayes" version="1.2.0">
-  <description>freebayes wrapper for covacs</description>
+  <description>freebayes, Bayesian genetic variant detector wrapper for covacs</description>
   <macros>
   <import>covacs_macros.xml</import>
   <import>bed_macros.xml</import>
@@ -57,6 +57,29 @@
   </help>
   <citations>
         <citation type="doi">10.1186/s12864-018-4508-1</citation>
+	<citation type="bibtex">
+            @article{Tange2011a,
+                title = {GNU Parallel - The Command-Line Power Tool},
+                author = {O. Tange},
+                address = {Frederiksberg, Denmark},
+                journal = {;login: The USENIX Magazine},
+                month = {Feb},
+                number = {1},
+                volume = {36},
+                url = {http://www.gnu.org/s/parallel},
+                year = {2011},
+                pages = {42-47}
+            }
+	</citation>
+	 <citation type="bibtex">
+                @misc{1207.3907,
+                    Author = {Erik Garrison},
+                    Title = {Haplotype-based variant detection from short-read sequencing},
+                    Year = {2012},
+                    Eprint = {arXiv:1207.3907},
+                    url = {http://arxiv.org/abs/1207.3907}
+                }
+         </citation>
   </citations>
 </tool>
 
