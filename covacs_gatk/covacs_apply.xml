@@ -49,7 +49,7 @@
   </command>
   <inputs>
     <param name="ref_file" type="select" label="Using reference genome" help="Select genome from the list">
-       <options from_data_table="mutect2_indexes">
+       <options from_data_table="covacs_gatk_indexes">
          <filter type="sort_by" column="2" />
          <validator type="no_options" message="No indexes are available" />
        </options>
