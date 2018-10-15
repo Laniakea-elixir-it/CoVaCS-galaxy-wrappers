@@ -90,6 +90,10 @@
     <data format="txt" name="log" label="${tool.name} on ${on_string}:log"/>
   </outputs>
   <help>
+	**IMPORTANT** to get the wrapper ready to start the admin user have to download gatk GATK version 3.8 from the broadinstitute site https://software.broadinstitute.org/gatk/download/archive and then move it in the conda_prefix folder, the path of the conda_prefix is written in the galaxy.ini(or .yml) file
+
+		**more informations** at https://software.broadinstitute.org/gatk/documentation/tooldocs/3.8-0/org_broadinstitute_gatk_tools_walkers_haplotypecaller_HaplotypeCaller.php
+
   </help>
   <citations>
         <citation type="doi">10.1186/s12864-018-4508-1</citation>
