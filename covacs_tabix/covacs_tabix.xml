@@ -23,9 +23,11 @@
     <data format="tabix" name="tabix_output" from_work_dir="covacs.vcf.gz.tbi" label="tabix on ${on_string}"/>
   </outputs>
   <help>
+**more informations** at http://www.htslib.org/doc/tabix.html
   </help>
   <citations>
         <citation type="doi">10.1186/s12864-018-4508-1</citation>
+        <citation type="doi">10.1093/bioinformatics/btq671</citation>
   </citations>
 </tool>
 
