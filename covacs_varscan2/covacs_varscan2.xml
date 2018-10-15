@@ -48,15 +48,13 @@ varscan 2>&1 | head -n 1
       	#end if
 
         ## Set up outputs.
-        --output-vcf 1 > $output &&
+        --output-vcf 1 > $output 
 
         #if $sample_names.strip() != '':
             --vcf-sample-list samples_list.txt
         #end if
 
-        #if str($filter) == 'yes':
-	 perl  $__tool_directory__/filter.varscan.pl $output $output_filtered
-	#end if
+	&& perl  $__tool_directory__/filter.varscan.pl $output $output_filtered
     ]]></command>
 
     <inputs>
@@ -78,10 +76,6 @@ varscan 2>&1 | head -n 1
             <option value="yes">yes</option>
         </param>
         <param name="sample_names" type="text" value="" help="Separate sample names by comma; leave blank to use default sample names."/>
-        <param name="filter" type="select" label="filter variants with filter.varscan.pl?">
-            <option value="no" >no</option>
-            <option value="yes" selected="true" >yes</option>
-        </param>
     </inputs>
 
     <outputs>
