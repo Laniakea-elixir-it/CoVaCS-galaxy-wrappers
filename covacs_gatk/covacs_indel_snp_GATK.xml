@@ -17,7 +17,7 @@
 	ln -s $input1 input1.vcf &&
 	
 	##GATK tool call
-	java -jar  \$CONDA_PREFIX/../../GenomeAnalysisTK.jar -T VariantRecalibrator
+	java -jar  \$CONDA_PREFIX/GenomeAnalysisTK.jar -T VariantRecalibrator
 
 
 
