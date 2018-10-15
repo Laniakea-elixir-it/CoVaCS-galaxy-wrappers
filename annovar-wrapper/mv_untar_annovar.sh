@@ -1,6 +1,6 @@
 #!/bin/bash
-#if the symbolic link is not present in the conda env of annovar the script search the tar.gz in the _conda prefix of the vm untar 
-#the archive and make a symbolic link of the directory in the conda env
+# if the symbolic link is not present in the annovar conda virtual environment the script search for the tar.gz in the conda_prefix,
+# untar the archive and make a symbolic link to the $CONDA_PREFIX of the conda virtual environment
 if [[ ! -d $CONDA_PREFIX/annovar ]] ; then
 	tar -zxvf $CONDA_PREFIX/../../annovar.*.tar.gz -C $CONDA_PREFIX/../../ &&
 	echo start untar &&
