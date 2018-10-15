@@ -1,5 +1,5 @@
 <tool id="annovar_elixir" name="annovar" version="1">
-  <description>prova annovar</description>
+  <description> annovar, annotate variants using specified gene annotations, regions, and filtering databases</description>
   <requirements>
     <requirement type="package" >perl</requirement>
   </requirements>
