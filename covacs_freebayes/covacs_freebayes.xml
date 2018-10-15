@@ -36,6 +36,11 @@
 
 	$input1
 	> $output
+	
+
+	 #if str($filter) == 'yes':
+         perl  $__tool_directory__/filter.fb.pl $output $output_filtered
+        #end if
 
 
 	]]>
@@ -45,6 +50,10 @@
     <param format="bam" name="input1" label="bam file" type="data" optional="true" />
     <expand macro="bed_loc"/>
     <param name="input2" label="-C min-alternate-count" type="text" optional="true"/>
+    <param name="filter" type="select" label="filter variants with filter.varscan.pl?">
+            <option value="no" >no</option>
+            <option value="yes" selected="true" >yes</option>
+    </param>
   </inputs>
   <outputs>
     <data format="vcf" name="output" label="${tool.name} on ${on_string}:vcf"/>
