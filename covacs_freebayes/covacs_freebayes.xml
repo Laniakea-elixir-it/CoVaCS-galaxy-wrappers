@@ -54,6 +54,27 @@
     <data format="vcf" name="output_filtered" label="freebayes filtered on ${on_string}" />
   </outputs>
   <help>
+**options implemented in the wrapper**
+
+-f --fasta-reference FILE
+                   Use FILE as the reference sequence for analysis.
+                   An index file (FILE.fai) will be created if none exists.
+                   If neither --targets nor --region are specified, FreeBayes
+                   will analyze every position in this reference.
+
+-C --min-alternate-count N
+                   Require at least this count of observations supporting
+                   an alternate allele within a single individual in order
+                   to evaluate the position.
+-t --targets FILE
+                   Limit analysis to targets listed in the BED-format FILE.
+
+**the wrapper gives 2 output** 
+
+-the normal output of freebayes
+
+-the output filtered by the filter.fb.pl script implemented in the covacs pipeline
+
   </help>
   <citations>
         <citation type="doi">10.1186/s12864-018-4508-1</citation>
