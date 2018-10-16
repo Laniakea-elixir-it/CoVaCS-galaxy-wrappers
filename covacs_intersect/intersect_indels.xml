@@ -19,6 +19,16 @@
   <stdio>
   </stdio>
   <help>
+**WHAT IT DOES**
+
+Predictions of indels from Varscan2, GATK and Freebayes are consolidated into a single call-set following a simple majority consensus rule. Variants  identified by at least two methods are incorporated into a final “high confidence” call set.Singleton variants predicted by only one method are considered less reliable and are included in a low quality call-set.
+
+**The final output consists of two VCF files:**
+
+-INDELs common to at least 2 methods
+
+-Singleton INDELs obtained from a single method
+
   </help>
   <citations>
 	<citation type="doi">10.1186/s12864-018-4508-1</citation>
