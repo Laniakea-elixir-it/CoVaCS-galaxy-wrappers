@@ -57,6 +57,11 @@
 	#end if
 	
 
+	##adding dbsnp file
+	#if $dbsnp
+	--dbsnp dbsnp.vcf
+	#end if	
+
 	##GVCF output
 	#if $GVCF
 	--emitRefConfidence GVCF
@@ -94,6 +99,15 @@
 	**IMPORTANT** to get the wrapper ready to start the admin user have to download gatk GATK version 3.8 from the broadinstitute site https://software.broadinstitute.org/gatk/download/archive and then move it in the conda_prefix folder, the path of the conda_prefix is written in the galaxy.ini(or .yml) file
 
 		**more informations** at https://software.broadinstitute.org/gatk/documentation/tooldocs/3.8-0/org_broadinstitute_gatk_tools_walkers_haplotypecaller_HaplotypeCaller.php
+opzioni HaplotypeCaller
+
+-L
+-stand_call_
+-R
+for output in GVCF format
+--emitRefConfidence GVCF
+-variant_index_type LINEAR
+-variant_index_parameter 128000
 
   </help>
   <citations>

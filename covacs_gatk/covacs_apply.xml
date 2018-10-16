@@ -75,6 +75,15 @@
 
 		**more informations** at https://software.broadinstitute.org/gatk/documentation/tooldocs/3.8-0/org_broadinstitute_gatk_tools_walkers_variantrecalibration_ApplyRecalibration.php
 
+options implemented ApplyRecalibrator
+-L
+-ip
+-R
+-ts_filter_level
+-tranchesFile
+-recallFile
+-mode
+
   </help>
   <citations>
         <citation type="doi">10.1186/s12864-018-4508-1</citation>
