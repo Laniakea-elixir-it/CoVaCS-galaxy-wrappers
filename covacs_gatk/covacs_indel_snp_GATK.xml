@@ -33,7 +33,7 @@
 
 
 	-ip $ip
-	##call chose genome from mutect2_indexes.loc
+	##call chose genome from covacs_gatk_indexes.loc
       		-R $ref_file.fields.path
 	
 	##vcf input parameter
@@ -93,7 +93,7 @@
     <param name="ip" type="text"/>
     <repeat name="resource" title="-resource">
       <param name="resource_input" type="data" lable="select resources"/>
-      <param name="nameresource" value="hapmap" type="text"/>
+      <param name="nameresource" label="name of the resource" value="hapmap" type="text"/>
       <param name="known" type="select">
 	<option value="true">true</option>
 	<option value="false">false</option>
