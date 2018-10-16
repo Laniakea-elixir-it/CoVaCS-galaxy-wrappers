@@ -1,7 +1,7 @@
 <macros>
   <macro name="bed_loc">
       <conditional name="bed_source">
-            <param name="bed_source_selector" type="select" label="Will you select a bed file from your history or use a built-in bed?" help="Built-ins were indexed using default options. See `Indexes` section of help below">
+            <param name="bed_source_selector" type="select" label="Will you select a bed file from your history or use a built-in bed?">
                 <option value="cached">Use a built-in bed</option>
                 <option value="history">Use a bed from history as reference</option>
             </param>
@@ -9,7 +9,7 @@
                 <param name="bed_cached" type="select" label="Using reference bed" help="Select bed from the list">
                     <options from_data_table="covacs_bed">
                         <filter type="sort_by" column="2" />
-                        <validator type="no_options" message="No indexes are available" />
+                        <validator type="no_options" message="No bed are available" />
                     </options>
                     <validator type="no_options" message="A built-in bed file is not available"/>
                 </param>
