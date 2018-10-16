@@ -86,11 +86,6 @@
 This tool will annotate variants using specified gene annotations, regions, and filtering databases. Input is a VCF dataset, and output is a table of annotations for each variant in the
 VCF dataset or a VCF dataset with the annotations in INFO fields.
 
-**ANNOVAR Website and Documentation**
-
-Website: http://www.openbioinformatics.org/annovar/
-
-Paper: http://nar.oxfordjournals.org/content/38/16/e164
 
 **Important Usage Note**
 
