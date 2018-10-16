@@ -23,6 +23,11 @@
     <data format="tabix" name="tabix_output" from_work_dir="covacs.vcf.gz.tbi" label="tabix on ${on_string}"/>
   </outputs>
   <help>
+The final output of the wrapper  consists of two files
+
+- file.vcf.gz from bgzip
+- file.vcf.gz.tbi from tabix
+
 **more informations** at http://www.htslib.org/doc/tabix.html
   </help>
   <citations>
