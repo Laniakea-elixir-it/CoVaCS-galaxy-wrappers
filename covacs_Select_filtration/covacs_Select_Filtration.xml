@@ -1,5 +1,5 @@
  <tool id="covacs_Select_Filtration" name="covacs_Select_filtration" version="3.8">
-  <description>use in case of not enought snp or indels in covacs_snp_indels</description>
+  <description>SelectVariants VariantFiltration wrapper for covacs, use in case of not enought snp or indels error in covacs_VariantRecalibrator</description>
   <macros>
   </macros>
   <requirements>

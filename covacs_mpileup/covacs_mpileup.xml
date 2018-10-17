@@ -1,5 +1,5 @@
  <tool id="covacs_mpileup" name="covacs_mpileup" version="1.9">
-  <description>mpileup for covacs</description>
+  <description>samtools mpileup wrapper for covacs</description>
   <macros>
 	<import>bed_macros.xml</import>
 	<import>covacs_macros.xml</import>

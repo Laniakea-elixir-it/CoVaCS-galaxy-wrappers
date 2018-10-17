@@ -1,5 +1,5 @@
- <tool id="covacs_indel_snp" name="covacs_indel_snp" version="3.8">
-  <description>gatk covacs</description>
+ <tool id="covacs_VarianRecalibrator" name="covacs_VariantRecalibrator" version="3.8">
+  <description>gatk wrapper for VariantRecalibrator in covacs</description>
   <macros>
 	<import>bed_macros.xml</import>
   </macros>

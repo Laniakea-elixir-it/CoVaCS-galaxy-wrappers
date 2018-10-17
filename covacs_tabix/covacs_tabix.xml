@@ -1,5 +1,5 @@
  <tool id="covacs_tabix" name="covacs_tabix" version="0.2.6">
-  <description> covacs tabix</description>
+  <description> tabix wrapper for covacs step</description>
   <macros>
   </macros>
   <requirements>
