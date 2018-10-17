@@ -1,5 +1,5 @@
 <tool id="intersect_snp" name="intersect_snp" version="0">
-  <description></description>
+  <description>tool for snp VCF file intersection </description>
   <requirements>
   </requirements>
   <command>

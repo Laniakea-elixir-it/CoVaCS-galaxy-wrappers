@@ -1,5 +1,5 @@
 <tool id="intersect_indels" name="intersect_indels" version="1">
-  <description></description>
+  <description>tool for indel VCF file intersection </description>
   <requirements>
   </requirements>
   <command>
