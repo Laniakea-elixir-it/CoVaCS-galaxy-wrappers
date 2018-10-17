@@ -112,10 +112,13 @@ VarScan_ performs variant detection for massively parallel sequencing data, such
 
   mpileup file - The SAMtools mpileup file
 
+**the wrapper gives 2 output**
 
-**Output**
+-the normal output of varscan2
 
-VarScan produces a VCF 4.1 dataset as output.
+-the output filtered by the filter.varscan.pl script implemented in the covacs pipeline
+
+
 
 **Parameters**
 
