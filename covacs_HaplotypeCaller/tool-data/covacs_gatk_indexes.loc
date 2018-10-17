@@ -1,0 +1,36 @@
+#This is a sample file distributed with Galaxy that enables tools
+#to use a directory of all covacs wrapper that need a gatk reference. You will need
+#to create these data files and then create a covacs_gatk_indexes.loc file
+#similar to this one (store it in this directory) that points to
+#the directories in which those files are stored. The covacs_gatk_indexes.loc
+#file has this format (longer white space characters are TAB characters):
+#
+#<unique_build_id>   <dbkey>   <display_name>   <file_path>
+#
+#So, for example, if you had phiX indexed stored in 
+#/depot/data2/galaxy/phiX/base/, 
+#then the bwa_index.loc entry would look like this:
+#
+#phiX174   phiX   phiX Pretty   /depot/data2/galaxy/phiX/base/phiX.fa
+#
+#and your /depot/data2/galaxy/phiX/base/ directory
+#would contain phiX.dict, phiX.fa.fai files.
+#
+#
+#Your covacs_gatk_indexes.loc file should include an entry per line for each
+#index set you have stored. The "file" in the path does not actually
+#exist, but it is the prefix for the actual index files.  For example:
+#
+#phiX174                                phiX    phiX174                 /depot/data2/galaxy/phiX/base/phiX.fa
+#hg18canon                              hg18    hg18 Canonical  /depot/data2/galaxy/hg18/base/hg18canon.fa
+#hg18full                               hg18    hg18 Full               /depot/data2/galaxy/hg18/base/hg18full.fa
+#/orig/path/hg19.fa             hg19    hg19                    /depot/data2/galaxy/hg19/base/hg19.fa
+#...etc...
+#
+#Note that for backwards compatibility with workflows, the unique ID of
+#an entry must be the path that was in the original loc file, because that
+#is the value stored in the workflow for that parameter. That is why the
+#hg19 entry above looks odd. New genomes can be better-looking.
+#
+hg38	hg38	hg38_GDC	/export/gatkhg38pl/GRCh38.d1.vd1.fa
+hg19	hg19	hg19	/export/gatk_hg19_index_bundle/ucsc.hg19.fasta
