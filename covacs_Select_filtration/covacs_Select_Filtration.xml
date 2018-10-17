@@ -55,6 +55,11 @@
 
 		**more informations** at https://software.broadinstitute.org/gatk/documentation/tooldocs/3.8-0/org_broadinstitute_gatk_tools_walkers_variantutils_SelectVariants.php , https://software.broadinstitute.org/gatk/documentation/tooldocs/3.8-0/org_broadinstitute_gatk_tools_walkers_filters_VariantFiltration.php
 
+**Implemented options** SelectVariants <![CDATA[ &]]> VariantFiltration
+-R 		Reference sequence file
+-V 		vcf input
+
+other options are fixed based on covacs pipeline
 **description** this step can be used if covacs_indel_snp have not enought data to create the model, it calls SelectVariants and VariantFiltration applying the filter expression --filterExpression <![CDATA["DP<8 || QD < 2.0 || FS > 200.0 || ReadPosRankSum < -20.0"]]> to filter the variants both snp and indels
 
   </help>

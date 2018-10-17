@@ -75,15 +75,15 @@
 
 		**more informations** at https://software.broadinstitute.org/gatk/documentation/tooldocs/3.8-0/org_broadinstitute_gatk_tools_walkers_variantrecalibration_ApplyRecalibration.php
 
-options implemented ApplyRecalibrator
--L
--ip
--R
--ts_filter_level
--tranchesFile
--recallFile
--mode
-
+**Options implemented** ApplyRecalibrator
+-L                   One or more genomic intervals over which to operate(file.bed)
+-ip                  Amount of padding (in bp) to add to each interval
+-R                   Reference sequence file
+-ts_filter_level     The truth sensitivity level at which to start filtering
+-tranchesFile        The input tranches file describing where to cut the data
+-recallFile          The input recal file used by ApplyRecalibration
+-mode                Recalibration mode to employ: SNP for recalibrating only
+                     SNPs, INDEL for indels
   </help>
   <citations>
         <citation type="doi">10.1186/s12864-018-4508-1</citation>

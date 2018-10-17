@@ -136,6 +136,24 @@
 
 		**more informations** at https://software.broadinstitute.org/gatk/documentation/tooldocs/3.8-0/org_broadinstitute_gatk_tools_walkers_variantrecalibration_VariantRecalibrator.php
 
+**Options implemented** VariantRecalibrator
+-L                   One or more genomic intervals over which to operate(file.bed)
+-ip                  Amount of padding (in bp) to add to each interval
+--resource:$NAME,known=true/false,training=true/false,truth=true/false,prior=float $file   A list of sites for which to apply a prior probability of being correct but which aren't used by the algorithm (training and truth sets are required to run)
+
+-mode   Recalibration mode to employ (SNP|INDEL|BOTH)
+
+-an $text The names of the annotations which should used for calculations
+
+-tranche $float     The levels of truth sensitivity at which to slice the data. (in percent, that is 1.0 for 1 percent)
+
+**in case of indels mode**
+--minNumBadVariants   Minimum number of bad variants
+--maxGaussians        Max number of Gaussians for the positive model
+-mNG                  Max number of Gaussians for the negative model
+OUTPUTS
+-recalFile
+-tranchesFile
 
   </help>
   <citations>

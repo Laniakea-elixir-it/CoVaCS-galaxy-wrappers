@@ -56,6 +56,18 @@
   </outputs>
   <help>
 **more information** at http://www.htslib.org/doc/samtools-1.2.html
+
+**Implemented options** samtools mpileup
+  -B, --no-BAQ            disable BAQ (per-Base Alignment Quality)
+  -C, --adjust-MQ INT     adjust mapping quality; recommended:50, disable:0 [0]
+  -d, --max-depth INT     max per-file depth; avoids excessive memory usage [8000]
+  -f, --fasta-ref FILE    faidx indexed reference sequence file
+  -l, --positions FILE    skip unlisted positions (chr pos) or regions (BED)
+  -q, --min-MQ INT        skip alignments with mapQ smaller than INT [0]
+  -Q, --min-BQ INT        skip bases with baseQ/BAQ smaller than INT [13]
+**fixed option**
+  -A, --count-orphans     do not discard anomalous read pairs
+
   </help>
   <citations>
         <citation type="doi">10.1186/s12864-018-4508-1</citation>
