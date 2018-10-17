@@ -100,16 +100,19 @@
 
 		**more informations** at https://software.broadinstitute.org/gatk/documentation/tooldocs/3.8-0/org_broadinstitute_gatk_tools_walkers_haplotypecaller_HaplotypeCaller.php
 
-**Options implemented** HaplotypeCaller
+**Implemented options** HaplotypeCaller
 
 -L		One or more genomic intervals over which to operate(file.bed)
--stand_call_conf		The minimum phred-scaled confidence threshold at which  variants should be called
+<![CDATA[-stand_call_conf]]>	The minimum phred-scaled confidence threshold at which  variants should be called
 -R		Reference sequence file
---dbsnp		dbsnp file
+--dbsnp			 dbsnp file
 
-in case of output in GVCF format
+**in case of output in GVCF format**
+
 --emitRefConfidence GVCF
+
 -variant_index_type LINEAR
+
 -variant_index_parameter 128000
 
   </help>

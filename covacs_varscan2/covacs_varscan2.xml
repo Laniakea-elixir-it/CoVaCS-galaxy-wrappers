@@ -1,5 +1,5 @@
 <tool id="covacs_varsca2" name="covacs_varscan2" version="2.4.2">
-    <description>covacs for variant detection</description>
+    <description>varscan2 wrapper for covacs</description>
     <requirements>
         <requirement type="package" version="2.4.2">varscan</requirement>
     </requirements>
