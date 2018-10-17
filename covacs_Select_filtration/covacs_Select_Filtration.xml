@@ -1,5 +1,5 @@
  <tool id="covacs_Select_Filtration" name="covacs_Select_filtration" version="3.8">
-  <description>SelectVariants VariantFiltration wrapper for covacs, use in case of not enought snp or indels error in covacs_VariantRecalibrator</description>
+  <description>SelectVariants VariantFiltration wrapper for covacs, use in case of not enough snp or indels error in covacs_VariantRecalibrator</description>
   <macros>
   </macros>
   <requirements>
@@ -63,7 +63,7 @@
 
 other options are fixed based on covacs pipeline
 
-**description** this step can be used if covacs_indel_snp have not enought data to create the model, it calls SelectVariants and VariantFiltration applying the filter expression --filterExpression <![CDATA["DP<8 || QD < 2.0 || FS > 200.0 || ReadPosRankSum < -20.0"]]> to filter the variants both snp and indels
+**description** this step can be used if covacs_indel_snp have not enough data to create the model, it calls SelectVariants and VariantFiltration applying the filter expression --filterExpression <![CDATA["DP<8 || QD < 2.0 || FS > 200.0 || ReadPosRankSum < -20.0"]]> to filter the variants both snp and indels
 
   </help>
   <citations>
