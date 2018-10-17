@@ -1,5 +1,5 @@
  <tool id="covacs_ApplyRecalibrator" name="covacs_ApplyRecalibrator" version="3.8">
-  <description>gatk covacs ApplyRecalibrator</description>
+  <description>gatk ApplyRecalibrator wrapper for covacs</description>
   <macros>
 	<import>bed_macros.xml</import>
   </macros>

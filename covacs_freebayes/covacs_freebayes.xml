@@ -1,5 +1,5 @@
  <tool id="covacs_frebayes" name="covacs_freebayes" version="1.2.0">
-  <description>freebayes, Bayesian genetic variant detector wrapper for covacs</description>
+  <description>freebayes, Bayesian genetic variant detector, wrapper for covacs</description>
   <macros>
   <import>covacs_macros.xml</import>
   <import>bed_macros.xml</import>
