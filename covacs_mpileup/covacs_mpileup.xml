@@ -13,7 +13,7 @@
 
        samtools mpileup 
 	 -C $adjust 
-	#if $bed_source.bed_source_selector == "history"
+	#if $bed_source.bed_source_selector == "history" and $bed_source.bed_history
 	  -l $bed_source.bed_history
 	  #end if
   	  #if $bed_source.bed_source_selector == "cached"

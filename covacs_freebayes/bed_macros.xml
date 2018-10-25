@@ -15,7 +15,7 @@
                 </param>
             </when>
             <when value="history">
-                <param name="bed_history" type="data" format="bed" label="Use the following dataset as reference bed " help="You can upload a bed file to the history and use it" />
+                <param name="bed_history" type="data" format="bed" label="Use the following dataset as reference bed " help="You can upload a bed file to the history and use it" optional="true" />
             </when> 
       </conditional>
   </macro>

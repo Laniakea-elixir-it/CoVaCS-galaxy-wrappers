@@ -40,7 +40,7 @@ varscan 2>&1 | head -n 1
         
 	## varscan bed limit added
 
- 	#if $bed_source.bed_source_selector == "history"
+ 	#if $bed_source.bed_source_selector == "history" and $bed_source.bed_history
       	limit $bed_source.bed_history
       	#end if
         #if $bed_source.bed_source_selector == "cached"

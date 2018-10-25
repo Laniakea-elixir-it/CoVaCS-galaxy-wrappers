@@ -19,7 +19,7 @@
         #if $reference_source.reference_source_selector == "cached"
                 -f $reference_source.ref_file.fields.path
         #end if
-        #if $reference_source.reference_source_selector == "history"
+        #if $reference_source.reference_source_selector == "history" 
 		-f $reference_source.ref_file_h
 	#end if
 	
@@ -27,7 +27,7 @@
 	-C $input2
 	#end if
 	
-	#if $bed_source.bed_source_selector == "history"
+	#if $bed_source.bed_source_selector == "history" and $bed_source.bed_history
         -t  $bed_source.bed_history 
         #end if
         #if $bed_source.bed_source_selector == "cached"
