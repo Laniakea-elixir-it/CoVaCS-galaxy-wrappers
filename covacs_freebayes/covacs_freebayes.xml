@@ -1,5 +1,5 @@
  <tool id="covacs_frebayes" name="covacs_freebayes" version="1.2.0">
-  <description>freebayes, Bayesian genetic variant detector, wrapper for covacs</description>
+  <description>Bayesian genetic variant detection</description>
   <macros>
   <import>covacs_macros.xml</import>
   <import>bed_macros.xml</import>
@@ -54,7 +54,7 @@
     <data format="vcf" name="output_filtered" label="freebayes filtered on ${on_string}" />
   </outputs>
   <help>
-**options implemented in the wrapper**
+**Currently available options**
 
 -f --fasta-reference FILE
                    Use FILE as the reference sequence for analysis.
@@ -69,29 +69,14 @@
 -t --targets FILE
                    Limit analysis to targets listed in the BED-format FILE.
 
-**the wrapper gives 2 output** 
+**Two output file are generated** 
 
--the normal output of freebayes
+The first output consists in a vcf file containing all the variants detected by Freebayes, the second file contains a subset of the variants filtered according to their QUAL score (QUAL >=20), see the CoVaCS paper for more details.
 
--the output filtered by the filter.fb.pl script implemented in the covacs pipeline
 
   </help>
   <citations>
         <citation type="doi">10.1186/s12864-018-4508-1</citation>
-	<citation type="bibtex">
-            @article{Tange2011a,
-                title = {GNU Parallel - The Command-Line Power Tool},
-                author = {O. Tange},
-                address = {Frederiksberg, Denmark},
-                journal = {;login: The USENIX Magazine},
-                month = {Feb},
-                number = {1},
-                volume = {36},
-                url = {http://www.gnu.org/s/parallel},
-                year = {2011},
-                pages = {42-47}
-            }
-	</citation>
 	 <citation type="bibtex">
                 @misc{1207.3907,
                     Author = {Erik Garrison},
