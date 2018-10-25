@@ -19,7 +19,7 @@
 	
 	#end if 
  	
-	#if $bed_source.bed_source_selector == "history"
+	#if $bed_source.bed_source_selector == "history " and $bed_source.bed_history
         ln -s  $bed_source.bed_history region.bed &&
 	#end if	
 	
@@ -33,7 +33,7 @@
 	java -jar  \$CONDA_PREFIX/../../GenomeAnalysisTK.jar -T HaplotypeCaller
 	
 	
-	#if $bed_source.bed_source_selector == "history"
+	#if $bed_source.bed_source_selector == "history" and $bed_source.bed_history
 
 	-L region.bed
 
