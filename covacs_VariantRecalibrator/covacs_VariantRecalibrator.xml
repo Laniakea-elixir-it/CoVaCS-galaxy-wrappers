@@ -94,15 +94,15 @@
     <repeat name="resource" title="-resource">
       <param name="resource_input" type="data" lable="select resources"/>
       <param name="nameresource" label="name of the resource" value="hapmap" type="text"/>
-      <param name="known" type="select">
+      <param name="known" type="select" display="radio">
 	<option value="true">true</option>
 	<option value="false">false</option>
       </param>
-      <param name="training" type="select">
+      <param name="training" type="select" display="radio">
 	<option value="true">true</option>
 	<option value="false">false</option>
       </param>
-      <param name="truth" type="select">
+      <param name="truth" type="select" display="radio">
 	<option value="true">true</option>
 	<option value="false">false</option>
       </param>
