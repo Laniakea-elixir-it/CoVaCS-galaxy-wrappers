@@ -1,5 +1,5 @@
  <tool id="covacs_HaplotypeCaller" name="covacs_HaplotypeCaller" version="3.8">
-  <description>gatk HaplotypeCaller wrapper for covacs</description>
+  <description>gatk HaplotypeCaller wrapper 3.8</description>
   <macros>
 	<import>bed_macros.xml</import>
   </macros>
@@ -96,7 +96,7 @@
     <data format="txt" name="log" label="${tool.name} on ${on_string}:log"/>
   </outputs>
   <help>
-	**IMPORTANT** to get the wrapper ready to start the admin user have to download gatk GATK version 3.8 from the broadinstitute site https://software.broadinstitute.org/gatk/download/archive and then move it in the conda_prefix folder, the path of the conda_prefix is written in the galaxy.ini(or .yml) file
+	**IMPORTANT** to get the wrapper ready to start the admin user have to download gatk GATK version 3.8 in tar.gz extension from the broadinstitute site https://software.broadinstitute.org/gatk/download/archive and then move it in the conda_prefix folder, the path of the conda_prefix is written in the galaxy.ini(or .yml) file
 
 		**more informations** at https://software.broadinstitute.org/gatk/documentation/tooldocs/3.8-0/org_broadinstitute_gatk_tools_walkers_haplotypecaller_HaplotypeCaller.php
 
