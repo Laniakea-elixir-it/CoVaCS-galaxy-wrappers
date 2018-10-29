@@ -63,7 +63,7 @@
 	#end if	
 
 	##GVCF output
-	#if $GVCF
+	#if str($mode) == "GVCF"
 	--emitRefConfidence GVCF
 	-variant_index_type LINEAR -variant_index_parameter 128000
 	#end if
@@ -86,7 +86,7 @@
     <expand macro="bed_loc"/>
     <param format="vcf" name="dbsnp" label="input dbsnp file" type="data" optional="true"/>
     <param name="standCall" value="30" type="text" optional="true"/>
-    <param name="GVCF" type="select" label="choose output format" >
+    <param name="mode" type="select" label="choose output format" >
 	<option value="GVCF">GVCF_output</option>
 	<option value="VCF">VCF_output</option>
     </param>
