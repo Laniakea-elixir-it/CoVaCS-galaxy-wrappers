@@ -1,7 +1,7 @@
 <macros>
   <macro name="bed_loc">
       <conditional name="bed_source">
-            <param name="bed_source_selector" type="select" label="Will you select a bed file from your history or use a built-in bed?">
+            <param name="bed_source_selector" type="select" label="Will you select a bed file from your history or use a built-in bed?" help=" bed file over which operate">
                 <option value="cached">Use a built-in bed</option>
                 <option value="history">Use a bed from history as reference</option>
             </param>
