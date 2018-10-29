@@ -1,5 +1,5 @@
  <tool id="covacs_VarianRecalibrator" name="covacs_VariantRecalibrator" version="3.8">
-  <description>gatk wrapper for VariantRecalibrator in covacs</description>
+  <description>GATK VariantRecalibrator wrapper Version = 3.8</description>
   <macros>
 	<import>bed_macros.xml</import>
   </macros>
@@ -90,10 +90,16 @@
     </param>
     <param format="vcf" name="input1" label="input vcf" type="data" optional="true" />
     <expand macro="bed_loc"/>
-    <param name="ip" type="text"/>
+    <param name="ip" type="integer" value="100"/>
     <repeat name="resource" title="-resource">
       <param name="resource_input" type="data" lable="select resources"/>
-      <param name="nameresource" label="name of the resource" value="hapmap" type="text"/>
+      <param name="nameresource" label="name of the resource" type="select">
+	<option value="hapmap">hapmap</option>
+	<option value="omni">omni</option>
+	<option value="1000G">1000G</option>
+	<option value="mills">mills</option>
+	<option value="dbsnp">dbsnp</option>
+      </param>
       <param name="known" type="select" display="radio">
 	<option value="true">true</option>
 	<option value="false">false</option>
@@ -106,16 +112,22 @@
 	<option value="true">true</option>
 	<option value="false">false</option>
       </param>
-      <param name="prior" value="10.0" type="text"/>
+      <param name="prior" value="10.0" min="0" max="100.0" type="float"/>
     </repeat>
    <repeat name="an" title="-an">
-      <param name="an_name" value="" type="text"/>
+      <param name="an_name" type="select">
+	<option value="DP">DP</option>
+	<option value="QD">QD</option>
+	<option value="MQRankSum">MQRankSum</option>
+	<option value="ReadPosRankSum">ReadPosRankSum</option>
+	<option value="FS">FS</option>
+       </param>
     </repeat>   	
     <repeat name="tranches_name" title="tranches">
-      <param name="tranches" value="" type="text"/>
+      <param name="tranches" value="98.0" min="0" max="100.0" type="float"/>
     </repeat>
     <conditional name="mode_type">
-    	<param name="mode" type="select">
+    	<param name="mode" type="select" display="radio">
 		<option value="SNP">snp</option>
 		<option value="INDEL">INDEL</option>
     	</param>	

@@ -85,7 +85,7 @@
 
 -ts_filter_level     The truth sensitivity level at which to start filtering
 
--tranchesFile        The input tranches file describing where to cut the data
+-tranchesFile        Level of sensitivity. A tranchesfile is required. Please read the GATK manual if you do according to the input tranches file
 
 -recallFile          The input recal file used by ApplyRecalibration
 
