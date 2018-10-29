@@ -47,7 +47,7 @@
     <expand macro="reference_loc"/>
     <param format="bam" name="input1" label="bam file" type="data" optional="true" />
     <expand macro="bed_loc"/>
-    <param name="input2" label="-C min-alternate-count" type="text" optional="true"/>
+    <param name="input2" label="-C min-alternate-count" type="integer" value="5" optional="true"/>
   </inputs>
   <outputs>
     <data format="vcf" name="output" label="${tool.name} on ${on_string}:vcf"/>
