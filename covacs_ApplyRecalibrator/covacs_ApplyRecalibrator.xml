@@ -58,7 +58,7 @@
     <param format="vcf" name="input1" label="input vcf" type="data" optional="true" />
     <expand macro="bed_loc"/>
     <param name="ip" type="text"/>
-    <param name="ts_filter_level" type="text"/>
+    <param name="ts_filter_level" type="float" value="99.5"/>
     <param name="input2" type="data" label="tranchesfile"/>
     <param name="input3" type="data" label="recalfile"/>
     <param name="mode" type="select">
