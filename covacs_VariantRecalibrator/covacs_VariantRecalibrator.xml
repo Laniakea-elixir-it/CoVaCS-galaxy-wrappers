@@ -144,37 +144,67 @@
     <data format="txt" name="log" label="log"/>
   </outputs>
   <help>
- **IMPORTANT** to get the wrapper ready to start the admin user have to download gatk GATK version 3.8 from the broadinstitute site https://software.broadinstitute.org/gatk/download/archive and then move it in the conda_prefix folder, the path of the conda_prefix is written in the galaxy.ini(or .yml) file
+.. class:: warningmark
+
+**IMPORTANT** to get the wrapper ready to start the admin user have to download gatk GATK version 3.8 from the broadinstitute site https://software.broadinstitute.org/gatk/download/archive and then move it in the conda_prefix folder, the path of the conda_prefix is written in the galaxy.ini(or .yml) file
 
 		**more informations** at https://software.broadinstitute.org/gatk/documentation/tooldocs/3.8-0/org_broadinstitute_gatk_tools_walkers_variantrecalibration_VariantRecalibrator.php
 
-**Implemented options** VariantRecalibrator
+-----
 
--L                   One or more genomic intervals over which to operate(file.bed)
+**Implemented options** VariantRecalibrator:
 
--ip                  Amount of padding (in bp) to add to each interval
+**-L**                   : One or more genomic intervals over which to operate(file.bed)
 
---resource:$NAME,known=true/false,training=true/false,truth=true/false,prior=float $file   A list of sites for which to apply a prior probability of being correct but which aren't used by the algorithm (training and truth sets are required to run)
+**-ip**                  Amount of padding (in bp) to add to each interval
 
--mode   Recalibration mode to employ (SNP|INDEL)
+**--resource:NAME,known=true/false,training=true/false,truth=true/false,prior=float $file**   :A list of sites for which to apply a prior probability of being correct but which aren't used by the algorithm (training and truth sets are required to run)
 
--an $text The names of the annotations which should used for calculations
+**-mode**   : Recalibration mode to employ (SNP|INDEL)
 
--tranche $float     The levels of truth sensitivity at which to slice the data. (in percent, that is 1.0 for 1 percent)
+**-an** : annotations which should used for calculations
+
+**-tranche**     The levels of truth sensitivity at which to slice the data. (in percent, that is 1.0 for 1 percent)
 
 **in case of indels mode**
 
---minNumBadVariants   Minimum number of bad variants
+**--minNumBadVariants**   : Minimum number of bad variants
 
---maxGaussians        Max number of Gaussians for the positive model
+**--maxGaussians**        : Max number of Gaussians for the positive model
 
--mNG                  Max number of Gaussians for the negative model
+**-mNG**                  : Max number of Gaussians for the negative model
 
 **OUTPUTS**
 
 -recalFile
 
 -tranchesFile
+
+-----
+
+.. class:: infomark
+
+**Recommended CoVaCS command**
+
+**-ip** 100
+
+**-R** genome.fa
+
+**-input** VCF
+
+**-resource**:hapmap,known=false,training=true,truth=true,prior=15.0 hapmap.vcf
+
+**-resource**:omni,known=false,training=true,truth=true,prior=12.0 omni.vcf
+
+**-resource**:1000G,known=false,training=false,truth=false,prior=8.0 1000G.vcf
+
+**-resource**:dbsnp,known=true,training=false,truth=false,prior=2.0 dbsnp.vcf
+
+**-mode** SNP
+
+**-an** DP **-an** QD **-an** MQ **-an** MQRankSum **-an** ReadPosRankSum **-an** FS
+
+**-tranche** 100.0 **-tranche** 99.5 **-tranche** 99.0 **-tranche** 98.5 **-tranche** 90.0
 
   </help>
   <citations>
