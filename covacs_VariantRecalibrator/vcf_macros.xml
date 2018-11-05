@@ -1,0 +1,22 @@
+<macros>
+  <macro name="vcf_loc">
+      <conditional name="vcf_source">
+            <param name="vcf_source_selector" type="select" label="Will you select a vcf file from your history or use a built-in vcf?" help=" vcf file over which operate">
+                <option value="cached">Use a built-in vcf</option>
+                <option value="history">Use a vcf from history as reference</option>
+            </param>
+            <when value="cached">
+                <param name="vcf_cached" type="select" label="Using reference vcf" help="Select vcf from the list">
+                    <options from_data_table="covacs_vcf">
+                        <filter type="sort_by" column="2" />
+                        <validator type="no_options" message="No vcf are available" />
+                    </options>
+                    <validator type="no_options" message="A built-in vcf file is not available"/>
+                </param>
+            </when>
+            <when value="history">
+                <param name="vcf_history" type="data" format="vcf" label="Use the following dataset as reference vcf " help="You can upload a vcf file to the history and use it" optional="true" />
+            </when> 
+      </conditional>
+  </macro>
+</macros>

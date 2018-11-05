@@ -2,6 +2,7 @@
   <description>GATK VariantRecalibrator wrapper Version = 3.8</description>
   <macros>
 	<import>bed_macros.xml</import>
+	<import>vcf_macros.xml</import>
   </macros>
   <requirements>
   	<requirement type="package" version="3.8" >gatk</requirement>
@@ -41,10 +42,18 @@
 	-input input1.vcf
 
 	## for that permit to insert different resources
-
+	
 	#for $r in $resource#
 
-		 --resource:${r.nameresource},known=${r.known.value},training=${r.training.value},truth=${r.truth.value},prior=${r.prior.value} ${r.resource_input}
+		#if $r.vcf_source.vcf_source_selector == "history" and $r.vcf_source.vcf_history
+	
+        	--resource:${r.nameresource},known=${r.known.value},training=${r.training.value},truth=${r.truth.value},prior=${r.prior.value} ${r.vcf_source.vcf_history}
+		#end if
+
+       	 	#if $r.vcf_source.vcf_source_selector == "cached"
+
+        	--resource:${r.nameresource},known=${r.known.value},training=${r.training.value},truth=${r.truth.value},prior=${r.prior.value} ${r.vcf_source.vcf_cached.fields.path}
+		#end if
 
 	#end for
 
@@ -92,7 +101,7 @@
     <expand macro="bed_loc"/>
     <param name="ip" type="integer" value="100" help="Amount of padding (in bp) to add to each interval"/>
     <repeat name="resource" title="-resource" help="A list of sites for which to apply a prior probability of being correct but which aren't used by the algorithm (training and truth sets are required to run)">
-      <param name="resource_input" type="data" lable="select resources"/>
+      <expand macro="vcf_loc"/>
       <param name="nameresource" label="name of the resource" type="select" >
 	<option value="hapmap">hapmap</option>
 	<option value="omni">omni</option>
