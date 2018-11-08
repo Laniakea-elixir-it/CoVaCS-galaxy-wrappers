@@ -13,7 +13,7 @@
 
        samtools mpileup 
 	 -C $adjust 
-	#if $bed_source.bed_source_selector == "history"
+	#if $bed_source.bed_source_selector == "history" and $bed_source.bed_history
 	  -l $bed_source.bed_history
 	  #end if
   	  #if $bed_source.bed_source_selector == "cached"
@@ -43,11 +43,11 @@
   </command>
   <inputs>
     <param format="bam" name="input1" label="bam-input" type="data" optional="true" />
-    <param name="adjust" type="text" optional="true" value="50" />
+    <param name="adjust" type="integer" optional="true" value="50" help="adjust mapping quality"/>
     <expand macro="bed_loc"/>
-    <param name="depth" type="text" optional="true" value="100000" />
-    <param name="MappingQuality" type="text" optional="true" value="0" />
-    <param name="BaseQuality" type="text" optional="true" value="0" />
+    <param name="depth" type="integer" optional="true" value="100000" help="max per-file depth" />
+    <param name="MappingQuality" type="integer" optional="true" value="0" help="skip alignments with mapQ smaller than INT" />
+    <param name="BaseQuality" type="integer" optional="true" value="0" help="skip bases with baseQ/BAQ smaller than INT" />
     <expand macro="reference_loc"/>
   </inputs>
   <outputs>

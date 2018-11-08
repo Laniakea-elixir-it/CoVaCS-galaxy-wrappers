@@ -1,0 +1,29 @@
+#This is a sample file distributed with Galaxy that enables tools
+#to use a directory vcf file for covacs sequences data files. You will need
+#to create these data files and then create a vcf_loc.loc file
+#similar to this one (store it in this directory) that points to
+#the directories in which those files are stored. The vcf_loc.loc
+#file has this format (longer white space characters are TAB characters):
+#
+#<unique_id>	<display_name>	<file_path>
+#
+#So, for example, if you had vcf file  stored in 
+#/export/resource/, 
+#then the covacs_vcf.loc entry would look like this:
+#
+#hapmap	hapmap   /export/resource/hapmap.vcf
+#
+#and your /export/resource directory
+#would contain hapmap.vcf.
+#
+#
+#Your covacs_vcf.loc file should include an entry per line for each
+#index set you have stored. The "file" in the path does not actually
+#exist, but it is the prefix for the actual index files. 
+#Note that for backwards compatibility with workflows, the unique ID of
+#an entry must be the path that was in the original loc file, because that
+#is the value stored in the workflow for that parameter.
+#
+hapmap	hapmap	/export/resources/hapmap.vcf
+1000G	1000G	/export/resources/1000G.vcf
+

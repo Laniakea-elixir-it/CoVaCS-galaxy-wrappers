@@ -1,7 +1,8 @@
  <tool id="covacs_VarianRecalibrator" name="covacs_VariantRecalibrator" version="3.8">
-  <description>gatk wrapper for VariantRecalibrator in covacs</description>
+  <description>GATK VariantRecalibrator wrapper Version = 3.8</description>
   <macros>
 	<import>bed_macros.xml</import>
+	<import>vcf_macros.xml</import>
   </macros>
   <requirements>
   	<requirement type="package" version="3.8" >gatk</requirement>
@@ -12,7 +13,7 @@
         sh $__tool_directory__/mv_untar_gatk.sh &&
 	
 	##sym link to run GATK
-	 #if $bed_source.bed_source_selector == "history"
+	 #if $bed_source.bed_source_selector == "history" and $bed_source.bed_history
          ln -s $bed_source.bed_history region.bed &&
 	#end if
 
@@ -23,7 +24,7 @@
 
 
 
-	#if $bed_source.bed_source_selector == "history"
+	#if $bed_source.bed_source_selector == "history" and $bed_source.bed_history
         -L  region.bed
         #end if
         #if $bed_source.bed_source_selector == "cached"
@@ -41,10 +42,18 @@
 	-input input1.vcf
 
 	## for that permit to insert different resources
-
+	
 	#for $r in $resource#
 
-		 --resource:${r.nameresource},known=${r.known.value},training=${r.training.value},truth=${r.truth.value},prior=${r.prior.value} ${r.resource_input}
+		#if $r.vcf_source.vcf_source_selector == "history" and $r.vcf_source.vcf_history
+	
+        	--resource:${r.nameresource},known=${r.known.value},training=${r.training.value},truth=${r.truth.value},prior=${r.prior.value} ${r.vcf_source.vcf_history}
+		#end if
+
+       	 	#if $r.vcf_source.vcf_source_selector == "cached"
+
+        	--resource:${r.nameresource},known=${r.known.value},training=${r.training.value},truth=${r.truth.value},prior=${r.prior.value} ${r.vcf_source.vcf_cached.fields.path}
+		#end if
 
 	#end for
 
@@ -88,34 +97,46 @@
        </options>
        <validator type="no_options" message="A built-in reference genome is not available for the build associated with the selected input file"/>
     </param>
-    <param format="vcf" name="input1" label="input vcf" type="data" optional="true" />
+    <param format="vcf" name="input1" label="VCF of raw input variants to be recalibrated" type="data" optional="true" />
     <expand macro="bed_loc"/>
-    <param name="ip" type="text"/>
-    <repeat name="resource" title="-resource">
-      <param name="resource_input" type="data" lable="select resources"/>
-      <param name="nameresource" label="name of the resource" value="hapmap" type="text"/>
-      <param name="known" type="select">
+    <param name="ip" type="integer" value="100" help="Amount of padding (in bp) to add to each interval"/>
+    <repeat name="resource" title="-resource" help="A list of sites for which to apply a prior probability of being correct but which aren't used by the algorithm (training and truth sets are required to run)">
+      <expand macro="vcf_loc"/>
+      <param name="nameresource" label="name of the resource" type="select" >
+	<option value="hapmap">hapmap</option>
+	<option value="omni">omni</option>
+	<option value="1000G">1000G</option>
+	<option value="mills">mills</option>
+	<option value="dbsnp">dbsnp</option>
+      </param>
+      <param name="known" type="select" display="radio" help="Known - The program only uses known sites for reporting purposes (to indicate whether variants are already known or novel)" >
 	<option value="true">true</option>
 	<option value="false">false</option>
       </param>
-      <param name="training" type="select">
+      <param name="training" type="select" display="radio" help="Training - The program builds the Gaussian mixture model using input variants that overlap with these training sites.">
 	<option value="true">true</option>
 	<option value="false">false</option>
       </param>
-      <param name="truth" type="select">
+      <param name="truth" type="select" display="radio" help="Truth - The program uses these truth sites to determine where to set the cutoff in VQSLOD sensitivity">
 	<option value="true">true</option>
 	<option value="false">false</option>
       </param>
-      <param name="prior" value="10.0" type="text"/>
+      <param name="prior" value="10.0" min="0" max="100.0" type="float"/>
     </repeat>
-   <repeat name="an" title="-an">
-      <param name="an_name" value="" type="text"/>
+   <repeat name="an" title="-an" help="Annotation which should used for calculations">
+      <param name="an_name" label="annotation name" type="select"  help="The name of the annotation which should used for calculations">
+	<option value="DP">DP</option>
+	<option value="QD">QD</option>
+	<option value="MQRankSum">MQRankSum</option>
+	<option value="ReadPosRankSum">ReadPosRankSum</option>
+	<option value="FS">FS</option>
+       </param>
     </repeat>   	
-    <repeat name="tranches_name" title="tranches">
-      <param name="tranches" value="" type="text"/>
+    <repeat name="tranches_name" title="tranches" help="The levels of truth sensitivity at which to slice the data. (in percent, that is 1.0 for 1 percent)">
+      <param name="tranches" value="98.0" min="0" max="100.0" type="float"/>
     </repeat>
     <conditional name="mode_type">
-    	<param name="mode" type="select">
+    	<param name="mode" type="select" display="radio" help=" Recalibration mode to employ (SNP|INDEL)">
 		<option value="SNP">snp</option>
 		<option value="INDEL">INDEL</option>
     	</param>	
@@ -132,37 +153,67 @@
     <data format="txt" name="log" label="log"/>
   </outputs>
   <help>
- **IMPORTANT** to get the wrapper ready to start the admin user have to download gatk GATK version 3.8 from the broadinstitute site https://software.broadinstitute.org/gatk/download/archive and then move it in the conda_prefix folder, the path of the conda_prefix is written in the galaxy.ini(or .yml) file
+.. class:: warningmark
+
+**IMPORTANT** to get the wrapper ready to start the admin user have to download gatk GATK version 3.8 from the broadinstitute site https://software.broadinstitute.org/gatk/download/archive and then move it in the conda_prefix folder, the path of the conda_prefix is written in the galaxy.ini(or .yml) file
 
 		**more informations** at https://software.broadinstitute.org/gatk/documentation/tooldocs/3.8-0/org_broadinstitute_gatk_tools_walkers_variantrecalibration_VariantRecalibrator.php
 
-**Implemented options** VariantRecalibrator
+-----
 
--L                   One or more genomic intervals over which to operate(file.bed)
+**Implemented options** VariantRecalibrator:
 
--ip                  Amount of padding (in bp) to add to each interval
+**-L**                   : One or more genomic intervals over which to operate(file.bed)
 
---resource:$NAME,known=true/false,training=true/false,truth=true/false,prior=float $file   A list of sites for which to apply a prior probability of being correct but which aren't used by the algorithm (training and truth sets are required to run)
+**-ip**                  Amount of padding (in bp) to add to each interval
 
--mode   Recalibration mode to employ (SNP|INDEL|BOTH)
+**--resource:NAME,known=true/false,training=true/false,truth=true/false,prior=float $file**   :A list of sites for which to apply a prior probability of being correct but which aren't used by the algorithm (training and truth sets are required to run)
 
--an $text The names of the annotations which should used for calculations
+**-mode**   : Recalibration mode to employ (SNP|INDEL)
 
--tranche $float     The levels of truth sensitivity at which to slice the data. (in percent, that is 1.0 for 1 percent)
+**-an** : annotations which should used for calculations
+
+**-tranche**     The levels of truth sensitivity at which to slice the data. (in percent, that is 1.0 for 1 percent)
 
 **in case of indels mode**
 
---minNumBadVariants   Minimum number of bad variants
+**--minNumBadVariants**   : Minimum number of bad variants
 
---maxGaussians        Max number of Gaussians for the positive model
+**--maxGaussians**        : Max number of Gaussians for the positive model
 
--mNG                  Max number of Gaussians for the negative model
+**-mNG**                  : Max number of Gaussians for the negative model
 
 **OUTPUTS**
 
 -recalFile
 
 -tranchesFile
+
+-----
+
+.. class:: infomark
+
+**Recommended CoVaCS command**
+
+**-ip** 100
+
+**-R** genome.fa
+
+**-input** VCF
+
+**-resource**:hapmap,known=false,training=true,truth=true,prior=15.0 hapmap.vcf
+
+**-resource**:omni,known=false,training=true,truth=true,prior=12.0 omni.vcf
+
+**-resource**:1000G,known=false,training=false,truth=false,prior=8.0 1000G.vcf
+
+**-resource**:dbsnp,known=true,training=false,truth=false,prior=2.0 dbsnp.vcf
+
+**-mode** SNP
+
+**-an** DP **-an** QD **-an** MQ **-an** MQRankSum **-an** ReadPosRankSum **-an** FS
+
+**-tranche** 100.0 **-tranche** 99.5 **-tranche** 99.0 **-tranche** 98.5 **-tranche** 90.0
 
   </help>
   <citations>

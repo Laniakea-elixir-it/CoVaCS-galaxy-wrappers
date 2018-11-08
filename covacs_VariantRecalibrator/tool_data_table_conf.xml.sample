@@ -1,0 +1,16 @@
+ <!-- Location of bed-file for covacs -->
+    <table name="covacs_bed" comment_char="#">
+        <columns> value, dbkey, name, path</columns>
+        <file path="tool-data/covacs_bed.loc" />
+    </table>
+<!-- Location of index file  for covacs gatk wrapper -->
+    <table name="covacs_gatk_indexes" comment_char="#">
+        <columns> value, dbkey, name, path</columns>
+        <file path="tool-data/covacs_gatk_indexes.loc" />
+    </table>
+<!-- Location of vcf-file for covacs VariantRecalibrator -->
+    <table name="covacs_vcf" comment_char="#">
+        <columns> value, name, path</columns>
+        <file path="tool-data/covacs_vcf.loc" />
+    </table>
+
