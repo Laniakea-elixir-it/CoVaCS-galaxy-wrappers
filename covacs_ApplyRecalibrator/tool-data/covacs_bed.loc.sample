@@ -13,5 +13,5 @@
 #is the value stored in the workflow for that parameter. That is why the
 #hg19 entry above looks odd. New genomes can be better-looking.
 #
-hg19	hg19	hg19-padded	/export/BED/S07084713_Padded.bed
-hgbed	hg19	hg19-bed-test	/export/BED/chr22.bed
+#hg19	hg19	hg19-padded	/export/BED/S07084713_Padded.bed
+#hgbed	hg19	hg19-bed-test	/export/BED/chr22.bed

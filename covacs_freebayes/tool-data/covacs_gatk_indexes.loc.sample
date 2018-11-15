@@ -32,5 +32,5 @@
 #is the value stored in the workflow for that parameter. That is why the
 #hg19 entry above looks odd. New genomes can be better-looking.
 #
-hg38	hg38	hg38_GDC	/export/gatkhg38pl/GRCh38.d1.vd1.fa
-hg19	hg19	hg19	/export/gatk_hg19_index_bundle/ucsc.hg19.fasta
+#hg38	hg38	hg38_GDC	/export/gatkhg38pl/GRCh38.d1.vd1.fa
+#hg19	hg19	hg19	/export/gatk_hg19_index_bundle/ucsc.hg19.fasta
