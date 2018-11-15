@@ -1,10 +1,9 @@
 
 #location of humandb the fields are tab delimited 
-db	location	/export/_conda/annovar/humandb
+#db	location	/export/_conda/annovar/humandb
 
 
-
-#definition of present db name + type(gene_ann, region, filter) the fields are tab delimited
-refGene	gene_ann	
-prova	gene_ann	
-exac03	filter		
+#definition of present db name + type(gene_ann, region, filter ) + assembly of the genome the fields are tab delimited
+#refGene	gene_ann	hg19
+#prova	gene_ann	hg19
+#exac03	filter		hg19
