@@ -130,6 +130,7 @@
 	<option value="MQRankSum">MQRankSum</option>
 	<option value="ReadPosRankSum">ReadPosRankSum</option>
 	<option value="FS">FS</option>
+	<option value="MQ">MQ</option>
        </param>
     </repeat>   	
     <repeat name="tranches_name" title="tranches" help="The levels of truth sensitivity at which to slice the data. (in percent, that is 1.0 for 1 percent)">
