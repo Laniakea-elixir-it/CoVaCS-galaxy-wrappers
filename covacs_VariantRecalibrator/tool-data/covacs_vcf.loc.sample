@@ -24,6 +24,6 @@
 #an entry must be the path that was in the original loc file, because that
 #is the value stored in the workflow for that parameter.
 #
-hapmap	hapmap	/export/resources/hapmap.vcf
-1000G	1000G	/export/resources/1000G.vcf
+#hapmap	hapmap	/export/resources/hapmap.vcf
+#1000G	1000G	/export/resources/1000G.vcf
 
