@@ -43,7 +43,7 @@
       <option value="hg19" selected="true">hg19</option>
       <option value="hg38" >hg38</option>
     </param>
-    <param name="NA" type="text" label="substitute NA with:"/>
+    <param name="NA" type="text" value="." label="substitute NA with:"/>
     <param format="vcf" name="input1" type="data" label="VCF" help="vcf input file"/>
     <param name="gene_anns" type="select" multiple="yes" optional="true">
       <options from_data_table="annovar">
