@@ -10,7 +10,7 @@
   <command>
     <![CDATA[
 	### call the .sh to untar the package 
-        sh $__tool_directory__/mv_untar_gatk.sh &&
+	bash $__tool_directory__/mv_untar_gatk.sh &> $log &&
 
 	##sym link to run GATK
 	#if $dbsnp

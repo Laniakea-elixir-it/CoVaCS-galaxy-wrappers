@@ -1,2 +1,0 @@
-# CoVaCS galaxy wrappers
-
